@@ -49,28 +49,29 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Nombre</label>
-                                                <input name="nombre" type="text" id="Nombre" placeholder="Nombre" class="form-control">        
+                                                <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
+                                                <input name="nombreCompleto" type="text" id="nombreCompleto" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">apellido</label>
-                                                <input name="apellido" type="text" id="apellido" placeholder="apellido" class="form-control">        
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Numero de telefono</label>
-                                                <input name="telefono" type="text" id="telefono" placeholder="0000 00000" class="form-control">        
-                                            </div>
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Fecha de nacimiento</label>
-                                                <input name="fecha_nac" type="date" id="fecha_nac"  class="form-control">       
+                                                <label for="texto de ejemplo" class="form-label">DNI</label>
+                                                <input name="dni" type="text" id="dni" placeholder="" class="form-control">        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Sexo</label>
-                                                <input name="Sexo" type="text" id="Sexo" placeholder="F o M" class="form-control">        
+                                                <label for="texto de ejemplo" class="form-label">Email</label>
+                                                <input name="email" type="text" id="email" placeholder="" class="form-control">        
+                                            </div>
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Contraseña</label>
+                                                <input name="contraseña" type="text" id="contraseña"  class="form-control">       
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
+                                                <input name="tipoUsuario" type="text" id="tipoUsuario" placeholder="" class="form-control">        
+                                            </div>    
                                         </div>
                                     </div>
                                 </form>    
@@ -90,14 +91,15 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class='xd'>id</th>
-                            <th class='xd'>Nombre</th>
-                            <th class='xd'>apellido<dni/th>
-                            <th class='xd'>Telefono</th>
-                            <th class='xd'>Fecha de nacimiento</th>
-                            <th class='xd'>Sexo</th>
-                            <th class='xd'>editar</th>
-                            <th class='xd'>borrar</th>
+                            <th class='xd'>ID usuarios</th>
+                            <th class='xd'>Nombre Completo</th>
+                            <th class='xd'>DNI</th>
+                            <th class='xd'>Email</th>
+                            <th class='xd'>Contraseña</th>
+                            <th class='xd'>Tipo de usuario</th>
+                            <th class='xd'>Datos Personales</th>
+                            <th class='xd'>Editar</th>
+                            <th class='xd'>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody  id="tabla1">
@@ -129,28 +131,23 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Nombre</label>
-                                                <input name="nombreEdit" type="text" id="nombreEdit" placeholder="Nombre" class="form-control">        
+                                                <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
+                                                <input name="nombreCompletoEdit" type="text" id="nombreCompletoEdit" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">apellido</label>
-                                                <input name="apellidoEdit" type="text" id="apellidoEdit" placeholder="apellido" class="form-control">        
-                                            </div>
+                                                <label for="texto de ejemplo" class="form-label">DNI</label>
+                                                <input name="dniEdit" type="text" id="dniEdit" placeholder="" class="form-control"> 
+                                            </div>       
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Numero de telefono</label>
-                                                <input name="telefonoEdit" type="text" id="telefonoEdit" placeholder="0000 00000" class="form-control">        
+                                                <label for="texto de ejemplo" class="form-label">Email</label>
+                                                <input name="emailEdit" type="text" id="emailEdit" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Fecha de nacimiento</label>
-                                                <input name="fecha_nacEdit" type="date" id="fecha_nacEdit"  class="form-control">       
+                                                <label for="texto de ejemplo" class="form-label">Contraseña</label>
+                                                <input name="contrasennaEdit" type="date" id="contrasennaEdit"  class="form-control">       
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Sexo</label>
-                                                <input name="sexoEdit" type="text" id="sexoEdit" placeholder="F o M" class="form-control">        
                                         </div>
                                     </div>
                                 </div>
@@ -250,13 +247,16 @@
         var datos = $('#formAdd').serialize();
 			$.ajax({
 				type:"POST",
-				url:"BackendAjax5_AddData.php",
+				url:"addUsuarios.php",
 				data: datos,
 				success:function(r){
-					if(r==1){
+					if(r == 1){
 						alert("agregado con exito");
+                        var r = 1
+                        cargarTabla();
 					}else{
 						alert("Fallo ");
+                        var cut = 1
 					}
 				}
 			})
@@ -267,23 +267,17 @@
             
         })
 
-
-        
-
-
-        //jquery envio de datos del formulario a php(con metodo $.ajax)
-        // console.log("pagina lista")
-        $("#ordenarNomb").keyup(function(){
-           //console.log("keypress")
+        function cargarTabla()
+        {   
             $("#tabla1").empty()
             var opt = $("#orderBy").val()
-            var p = $("#ordenarNomb").val()
-            if (p != ""){
+            var l = $("#ordenarNomb").val()
+            if (l != ""){
                //console.log("if")
             $.ajax({
                 url: "BackendAjax5.php", //action
                 type: "POST", //method
-                data: {"alumnos3": p, "opcion": opt},
+                data: {"letra": l, "opcion": opt},
                 dataType: "json",
                 success: function(respuesta){
                  //console.log("each")
@@ -292,14 +286,14 @@
                     $.each(respuesta, function(key, value){
                         
                         $("#tabla1").append("<tr id='fila"+fv+"'  >"+
-                        "<td class='xd'>"+value.id_alumno+"</td>"+
-                        "<td class='xd'>"+value.nombre+"</td>"+
-                        "<td class='xd'>"+value.apellido+"</td>"+
-                        "<td class='xd'>"+value.tel+"</td>"+
-                        "<td class='xd'>"+value.fecha_de_nacimiento+"</td>"+
-                        "<td class='xd'>"+value.sexo+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../img/IconoBasura.png'>"+"</td>"+
+                        "<td class='xd'>"+value.id_usuarios+"</td>"+
+                        "<td class='xd'>"+value.nombre_completo+"</td>"+
+                        "<td class='xd'>"+value.email+"</td>"+
+                        "<td class='xd'>"+value.dni+"</td>"+
+                        "<td class='xd'>"+value.contrasenna+"</td>"+
+                        "<td class='xd'>"+value.tipo_usuario+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
                         "</tr>") 
 
                         $("#edit"+fv).click(function(){
@@ -348,6 +342,177 @@
                         })
 
                         /*----------funcion para eliminar datos----------*/
+                        $("#delete"+fv).click(function(){
+                            
+                            $("#idDelete").val(value.id_alumno)
+                            $("#idDelete").attr('placeholder', value.id_alumno)
+
+                            $("#nombreDelete").val(value.nombre)
+                            $("#nombreDelete").attr('placeholder', value.nombre)
+
+                            $("#apellidoDelete").val(value.apellido)
+                            $("#apellidoDelete").attr('placeholder', value.apellido)
+                            
+                            $("#telefonoDelete").val(value.tel)
+                            $("#telefonoDelete").attr('placeholder', value.tel)
+                            
+                            $("#fecha_nacDelete").val(value.fecha_de_nacimiento)
+                            $("#fecha_nacDelete").attr('placeholder', value.fecha_de_nacimiento)
+                            
+                            $("#sexoDelete").val(value.sexo)
+                            $("#sexoDelete").attr('placeholder', value.sexo)
+
+                            $("#deleteData").click(function(){
+
+                                var eliminarDatos = $("#formDelete").serialize();
+                                $.ajax({
+                                url: "BackendAjax5_DeleteData.php",
+                                type: "POST",
+                                data: eliminarDatos,
+                                success: function(r){
+                                    if (r == 1) {
+                                        
+                                        alert("datos Eliminados")
+                                        return false;
+                                        
+                                    }
+                                    
+                                    }
+
+                                })
+
+                            })
+
+                        })
+
+                        fv = fv + 1
+                        
+                    })
+                    
+                }
+                
+            })
+            }
+            
+        }
+        
+        $("#orderBy").change(function(){
+            cargarTabla();
+        })
+
+        $("#ordenarNomb").keyup(function(){
+            cargarTabla();
+        })
+
+        /*
+        $("#orderBy").change(function(){
+            var opt = $("#opcion").val()
+            if (opt != 0)
+            {
+            $.ajax({
+                url: "BackendAjax.php", //action
+                type: "POST", //method
+                data: {"opcion": opt},
+                dataType: "json",
+                success: function(respuesta){
+                 //console.log("each")
+                    $.each(respuesta, function(key, value){ 
+                        $("#tabla1").append("<tr>"+
+                        "<td class='xd'>"+value.id_alumno+"</td>"+
+                        "<td class='xd'>"+value.nombre+"</td>"+
+                        "<td class='xd'>"+value.apellido+"</td>"+
+                        "<td class='xd'>"+value.tel+"</td>"+
+                        "<td class='xd'>"+value.fecha_de_nacimiento+"</td>"+
+                        "<td class='xd'>"+value.sexo+"</td>"+
+                        "</tr>") 
+
+                    })
+                   
+                }
+                
+            })
+            }
+        })
+        */
+       /*
+       
+        //jquery envio de datos del formulario a php(con metodo $.ajax)
+        // console.log("pagina lista")
+        $("#ordenarNomb").keyup(function(){
+           //console.log("keypress")
+            $("#tabla1").empty()
+            var opt = $("#orderBy").val()
+            var l = $("#ordenarNomb").val()
+            if (l != ""){
+               //console.log("if")
+            $.ajax({
+                url: "BackendAjax5.php", //action
+                type: "POST", //method
+                data: {"letra": l, "opcion": opt},
+                dataType: "json",
+                success: function(respuesta){
+                 //console.log("each")
+                 var fv = 1
+                 
+                    $.each(respuesta, function(key, value){
+                        
+                        $("#tabla1").append("<tr id='fila"+fv+"'  >"+
+                        "<td class='xd'>"+value.id_usuarios+"</td>"+
+                        "<td class='xd'>"+value.nombre_completo+"</td>"+
+                        "<td class='xd'>"+value.email+"</td>"+
+                        "<td class='xd'>"+value.dni+"</td>"+
+                        "<td class='xd'>"+value.contrasenna+"</td>"+
+                        "<td class='xd'>"+value.tipo_usuario+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                        "</tr>") 
+
+                        $("#edit"+fv).click(function(){
+
+                            //alert("id: " + value.id_alumno)
+                            
+                            $("#idEdit").val(value.id_alumno)
+                            $("#idEdit").attr('placeholder', value.id_alumno)
+
+                            $("#nombreEdit").val(value.nombre)
+                            $("#nombreEdit").attr('placeholder', value.nombre)
+
+                            $("#apellidoEdit").val(value.apellido)
+                            $("#apellidoEdit").attr('placeholder', value.apellido)
+                            
+                            $("#telefonoEdit").val(value.tel)
+                            $("#telefonoEdit").attr('placeholder', value.tel)
+                            
+                            $("#fecha_nacEdit").val(value.fecha_de_nacimiento)
+                            $("#fecha_nacEdit").attr('placeholder', value.fecha_de_nacimiento)
+                            
+                            $("#sexoEdit").val(value.sexo)
+                            $("#sexoEdit").attr('placeholder', value.sexo)
+
+                            $("#editData").click(function(){
+
+                                var editarDatos = $("#formEdit").serialize();
+                                $.ajax({
+                                url: "BackendAjax5_EditData.php",
+                                type: "POST",
+                                data: editarDatos,
+                                success: function(r){
+                                    if (r == 1) {
+                                        
+                                        alert("datos modificados con exito")
+                                        return false;
+                                        
+                                    }
+                                    
+                                    }
+
+                                })
+
+                            })
+                            
+                        })
+
+                        ----------funcion para eliminar datos----------
                         $("#delete"+fv).click(function(){
                             
                             $("#idDelete").val(value.id_alumno)
@@ -475,7 +640,7 @@
                             
                         })
 
-                        /*----------funcion para eliminar datos----------*/
+                        ----------funcion para eliminar datos----------
                         $("#delete"+fv).click(function(){
                             
                             $("#idDelete").val(value.id_alumno)
@@ -528,40 +693,10 @@
             })
             }
         })
-
-        
-
-        /*
-        $("#orderBy").change(function(){
-            var opt = $("#opcion").val()
-            if (opt != 0)
-            {
-            $.ajax({
-                url: "BackendAjax.php", //action
-                type: "POST", //method
-                data: {"opcion": opt},
-                dataType: "json",
-                success: function(respuesta){
-                 //console.log("each")
-                    $.each(respuesta, function(key, value){ 
-                        $("#tabla1").append("<tr>"+
-                        "<td class='xd'>"+value.id_alumno+"</td>"+
-                        "<td class='xd'>"+value.nombre+"</td>"+
-                        "<td class='xd'>"+value.apellido+"</td>"+
-                        "<td class='xd'>"+value.tel+"</td>"+
-                        "<td class='xd'>"+value.fecha_de_nacimiento+"</td>"+
-                        "<td class='xd'>"+value.sexo+"</td>"+
-                        "</tr>") 
-
-                    })
-                   
-                }
-                
-            })
-            }
-        })
-        */
+       */
    })
+
+
 
 </script>
 <style>
