@@ -146,8 +146,14 @@
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contrasennaEdit" type="date" id="contrasennaEdit"  class="form-control">       
+                                                <input name="contrasennaEdit" type="text" id="contrasennaEdit"  class="form-control">       
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
+                                                <input name="tipoUsuarioEdit" type="text" id="tipoUsuarioEdit" placeholder="" class="form-control">        
+                                            </div>    
                                         </div>
                                     </div>
                                 </div>
@@ -186,17 +192,17 @@
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre</label>
-                                                <input name="nombreDelete" type="text" id="nombreDelete" placeholder="Nombre" class="form-control" readonly>        
+                                                <input name="nombreDelete" type="text" id="nombreDelete" placeholder="" class="form-control" readonly>        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">apellido</label>
-                                                <input name="apellidoDelete" type="text" id="apellidoDelete" placeholder="apellido" class="form-control" readonly>        
+                                                <input name="apellidoDelete" type="text" id="apellidoDelete" placeholder="" class="form-control" readonly>        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Numero de telefono</label>
-                                                <input name="telefonoDelete" type="text" id="telefonoDelete" placeholder="0000 00000" class="form-control" readonly>        
+                                                <input name="telefonoDelete" type="text" id="telefonoDelete" placeholder="" class="form-control" readonly>        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Fecha de nacimiento</label>
@@ -206,7 +212,7 @@
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Sexo</label>
-                                                <input name="sexoDelete" type="text" id="sexoDelete" placeholder="F o M" class="form-control" readonly>        
+                                                <input name="sexoDelete" type="text" id="sexoDelete" placeholder="" class="form-control" readonly>        
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +281,7 @@
             if (l != ""){
                //console.log("if")
             $.ajax({
-                url: "BackendAjax5.php", //action
+                url: "BackendUsuarios.php", //action
                 type: "POST", //method
                 data: {"letra": l, "opcion": opt},
                 dataType: "json",
@@ -286,7 +292,7 @@
                     $.each(respuesta, function(key, value){
                         
                         $("#tabla1").append("<tr id='fila"+fv+"'  >"+
-                        "<td class='xd'>"+value.id_usuarios+"</td>"+
+                        "<td class='xd'>"+value.id_usuario+"</td>"+
                         "<td class='xd'>"+value.nombre_completo+"</td>"+
                         "<td class='xd'>"+value.email+"</td>"+
                         "<td class='xd'>"+value.dni+"</td>"+
@@ -300,29 +306,29 @@
 
                             //alert("id: " + value.id_alumno)
                             
-                            $("#idEdit").val(value.id_alumno)
-                            $("#idEdit").attr('placeholder', value.id_alumno)
+                            $("#idEdit").val(value.id_usuario)
+                            $("#idEdit").attr('placeholder', value.id_usuario)
 
-                            $("#nombreEdit").val(value.nombre)
-                            $("#nombreEdit").attr('placeholder', value.nombre)
+                            $("#nombreCompletoEdit").val(value.nombre_completo)
+                            $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoEdit").val(value.apellido)
-                            $("#apellidoEdit").attr('placeholder', value.apellido)
+                            $("#dniEdit").val(value.dni)
+                            $("#dniEdit").attr('placeholder', value.dni)
                             
-                            $("#telefonoEdit").val(value.tel)
-                            $("#telefonoEdit").attr('placeholder', value.tel)
+                            $("#emailEdit").val(value.email)
+                            $("#emailEdit").attr('placeholder', value.email)
                             
-                            $("#fecha_nacEdit").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacEdit").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#contrasennaEdit").val(value.contrasenna)
+                            $("#contrasennaEdit").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoEdit").val(value.sexo)
-                            $("#sexoEdit").attr('placeholder', value.sexo)
+                            $("#tipoUsuarioEdit").val(value.tipo_usuario)
+                            $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
 
                             $("#editData").click(function(){
 
                                 var editarDatos = $("#formEdit").serialize();
                                 $.ajax({
-                                url: "BackendAjax5_EditData.php",
+                                url: "RenameUsuarios.php",
                                 type: "POST",
                                 data: editarDatos,
                                 success: function(r){
@@ -344,29 +350,29 @@
                         /*----------funcion para eliminar datos----------*/
                         $("#delete"+fv).click(function(){
                             
-                            $("#idDelete").val(value.id_alumno)
-                            $("#idDelete").attr('placeholder', value.id_alumno)
+                            $("#idDelete").val(value.id_usuario)
+                            $("#idDelete").attr('placeholder', value.id_usuario)
 
-                            $("#nombreDelete").val(value.nombre)
-                            $("#nombreDelete").attr('placeholder', value.nombre)
+                            $("#nombreDelete").val(value.nombre_completo)
+                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.apellido)
-                            $("#apellidoDelete").attr('placeholder', value.apellido)
+                            $("#apellidoDelete").val(value.dni)
+                            $("#apellidoDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.tel)
-                            $("#telefonoDelete").attr('placeholder', value.tel)
+                            $("#telefonoDelete").val(value.email)
+                            $("#telefonoDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacDelete").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#fecha_nacDelete").val(value.contrasenna)
+                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.sexo)
-                            $("#sexoDelete").attr('placeholder', value.sexo)
+                            $("#sexoDelete").val(value.tipo_usuario)
+                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
                                 var eliminarDatos = $("#formDelete").serialize();
                                 $.ajax({
-                                url: "BackendAjax5_DeleteData.php",
+                                url: "DeleteUsuarios.php",
                                 type: "POST",
                                 data: eliminarDatos,
                                 success: function(r){
@@ -457,7 +463,7 @@
                     $.each(respuesta, function(key, value){
                         
                         $("#tabla1").append("<tr id='fila"+fv+"'  >"+
-                        "<td class='xd'>"+value.id_usuarios+"</td>"+
+                        "<td class='xd'>"+value.id_usuario+"</td>"+
                         "<td class='xd'>"+value.nombre_completo+"</td>"+
                         "<td class='xd'>"+value.email+"</td>"+
                         "<td class='xd'>"+value.dni+"</td>"+
@@ -474,20 +480,20 @@
                             $("#idEdit").val(value.id_alumno)
                             $("#idEdit").attr('placeholder', value.id_alumno)
 
-                            $("#nombreEdit").val(value.nombre)
-                            $("#nombreEdit").attr('placeholder', value.nombre)
+                            $("#nombreEdit").val(value.nombre_completo)
+                            $("#nombreEdit").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoEdit").val(value.apellido)
-                            $("#apellidoEdit").attr('placeholder', value.apellido)
+                            $("#apellidoEdit").val(value.dni)
+                            $("#apellidoEdit").attr('placeholder', value.dni)
                             
-                            $("#telefonoEdit").val(value.tel)
-                            $("#telefonoEdit").attr('placeholder', value.tel)
+                            $("#telefonoEdit").val(value.email)
+                            $("#telefonoEdit").attr('placeholder', value.email)
                             
-                            $("#fecha_nacEdit").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacEdit").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#fecha_nacEdit").val(value.contrasenna)
+                            $("#fecha_nacEdit").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoEdit").val(value.sexo)
-                            $("#sexoEdit").attr('placeholder', value.sexo)
+                            $("#sexoEdit").val(value.tipo_usuario)
+                            $("#sexoEdit").attr('placeholder', value.tipo_usuario)
 
                             $("#editData").click(function(){
 
@@ -518,20 +524,20 @@
                             $("#idDelete").val(value.id_alumno)
                             $("#idDelete").attr('placeholder', value.id_alumno)
 
-                            $("#nombreDelete").val(value.nombre)
-                            $("#nombreDelete").attr('placeholder', value.nombre)
+                            $("#nombreDelete").val(value.nombre_completo)
+                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.apellido)
-                            $("#apellidoDelete").attr('placeholder', value.apellido)
+                            $("#apellidoDelete").val(value.dni)
+                            $("#apellidoDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.tel)
-                            $("#telefonoDelete").attr('placeholder', value.tel)
+                            $("#telefonoDelete").val(value.email)
+                            $("#telefonoDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacDelete").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#fecha_nacDelete").val(value.contrasenna)
+                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.sexo)
-                            $("#sexoDelete").attr('placeholder', value.sexo)
+                            $("#sexoDelete").val(value.tipo_usuario)
+                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
@@ -602,20 +608,20 @@
                             $("#idEdit").val(value.id_alumno)
                             $("#idEdit").attr('placeholder', value.id_alumno)
 
-                            $("#nombreEdit").val(value.nombre)
-                            $("#nombreEdit").attr('placeholder', value.nombre)
+                            $("#nombreEdit").val(value.nombre_completo)
+                            $("#nombreEdit").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoEdit").val(value.apellido)
-                            $("#apellidoEdit").attr('placeholder', value.apellido)
+                            $("#apellidoEdit").val(value.dni)
+                            $("#apellidoEdit").attr('placeholder', value.dni)
                             
-                            $("#telefonoEdit").val(value.tel)
-                            $("#telefonoEdit").attr('placeholder', value.tel)
+                            $("#telefonoEdit").val(value.email)
+                            $("#telefonoEdit").attr('placeholder', value.email)
                             
-                            $("#fecha_nacEdit").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacEdit").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#fecha_nacEdit").val(value.contrasenna)
+                            $("#fecha_nacEdit").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoEdit").val(value.sexo)
-                            $("#sexoEdit").attr('placeholder', value.sexo)
+                            $("#sexoEdit").val(value.tipo_usuario)
+                            $("#sexoEdit").attr('placeholder', value.tipo_usuario)
 
                             $("#editData").click(function(){
 
@@ -646,20 +652,20 @@
                             $("#idDelete").val(value.id_alumno)
                             $("#idDelete").attr('placeholder', value.id_alumno)
 
-                            $("#nombreDelete").val(value.nombre)
-                            $("#nombreDelete").attr('placeholder', value.nombre)
+                            $("#nombreDelete").val(value.nombre_completo)
+                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.apellido)
-                            $("#apellidoDelete").attr('placeholder', value.apellido)
+                            $("#apellidoDelete").val(value.dni)
+                            $("#apellidoDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.tel)
-                            $("#telefonoDelete").attr('placeholder', value.tel)
+                            $("#telefonoDelete").val(value.email)
+                            $("#telefonoDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.fecha_de_nacimiento)
-                            $("#fecha_nacDelete").attr('placeholder', value.fecha_de_nacimiento)
+                            $("#fecha_nacDelete").val(value.contrasenna)
+                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.sexo)
-                            $("#sexoDelete").attr('placeholder', value.sexo)
+                            $("#sexoDelete").val(value.tipo_usuario)
+                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
