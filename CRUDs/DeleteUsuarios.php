@@ -2,17 +2,17 @@
 require 'conexion.php';
 
 $id = $_POST['idDelete'];
-$nom = $_POST['nombreDelete'];
-$apellido = $_POST['apellidoDelete'];
-$tel = $_POST['telefonoDelete'];
-$fecha_nac = $_POST['fecha_nacDelete'];
-$Sexo = $_POST['sexoDelete'];
+$nomComp = $_POST['nombreCompletoDelete'];
+$dni = $_POST['dniDelete'];
+$email = $_POST['emailDelete'];
+$contra = $_POST['contrasennaDelete'];
+$tipo = $_POST['tipoUsuarioDelete'];
 
 
 
 
 
-$q = "DELETE FROM alumnos3 WHERE id_alumno = '$id'";
+$q = "DELETE FROM usuarios WHERE id_usuario = '$id'";
 
 echo mysqli_query($con, $q);
 

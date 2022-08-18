@@ -5,9 +5,9 @@
 <!--16/8-->
 
 <!------Cambios al programa------>
-<!--Funcion para dar de alta ya funcional-->
-<!--Funcion para editar una fila ya funcional-->
-<!--Funcion para leer la tabla por el campo "nombre_completo" ya funcional-->
+<!--implementada la funcion para dar de alta una fila-->
+<!--implementada la funcion para editar una fila-->
+<!--implementada la funcion para leer la tabla por el campo "nombre_completo"-->
 
 <!------Cambios a la interfaz------>
 <!-- cambios a las etiquetas th y td para que se puedan completar con los datos de la tabla usuarios  -->
@@ -15,20 +15,32 @@
 <!-- cambios a los parametros id y name de los input de "myModal", "MmdalEdit" y "MmdalDelete" para implementar las funciones correspondientes a cada uno  -->
 
 <!------Cambios a la estructura del codigo------>
-<!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada en la linea 285 como "function cargarTabla()".
-     Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
+<!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada como "function cargarTabla()".
+Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
 
 <!------Mejoras al programa------>
-        <!-- Ahora la tabla se recarga al dar de alta  -->
+<!-- Ahora la tabla se recarga al dar de alta  
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
 
 
 <!--18/8-->
 
+<!------Cambios al programa------>
+<!--17: 31-->
+<!--implementada la funcion para dar de baja una fila-->
+
+<!------Cambios a la interfaz------>
+<!--sin cambios-->
+
 <!------Cambios a la estructura del codigo------>
 <!--15: 46-->
-<!-- La funcionalidad de Editar datos ahora esta en la funcion editartabla() declarada en la linea 292-->
+<!-- La funcionalidad de editar datos ahora esta declarada en una funcion como "editartabla()"" -->
 <!-- el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
+<!--17: 31-->
+<!-- La funcionalidad de eliminar datos ahora esta declarada en una funcion como "eliminartabla()" -->
 
+<!------Mejoras al programa------>
+<!--sin cambios-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -221,28 +233,29 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Nombre</label>
-                                                <input name="nombreDelete" type="text" id="nombreDelete" placeholder="" class="form-control" readonly>        
+                                                <label for="texto de ejemplo" class="form-label">Nombre completo</label>
+                                                <input name="nombreCompletoDelete" type="text" id="nombreCompletoDelete" placeholder="" class="form-control" readonly>        
                                             </div>
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">apellido</label>
-                                                <input name="apellidoDelete" type="text" id="apellidoDelete" placeholder="" class="form-control" readonly>        
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Numero de telefono</label>
-                                                <input name="telefonoDelete" type="text" id="telefonoDelete" placeholder="" class="form-control" readonly>        
-                                            </div>
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Fecha de nacimiento</label>
-                                                <input name="fecha_nacDelete" type="date" id="fecha_nacDelete"  class="form-control" readonly>       
+                                                <label for="texto de ejemplo" class="form-label">DNI</label>
+                                                <input name="dniDelete" type="text" id="dniDelete" placeholder="" class="form-control" readonly>        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Sexo</label>
-                                                <input name="sexoDelete" type="text" id="sexoDelete" placeholder="" class="form-control" readonly>        
+                                                <label for="texto de ejemplo" class="form-label">Correo electronico</label>
+                                                <input name="emailDelete" type="text" id="emailDelete" placeholder="" class="form-control" readonly>        
+                                            </div>
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">contraseña</label>
+                                                <input name="contrasennaDelete" type="text" id="contrasennaDelete"  class="form-control" readonly>       
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
+                                                <input name="tipoUsuarioDelete" type="text" id="tipoUsuarioDelete" placeholder="" class="form-control" readonly>        
+                                            </div>    
                                         </div>
                                     </div>
                                 </div>
@@ -290,54 +303,100 @@
 
             
         })
-
+        
 
         function editartabla(value)
-            {
-                
-                console.log("xd",value)
-                
-                
-                $("#idEdit").val(value.id_usuario)
-                $("#idEdit").attr('placeholder', value.id_usuario)
+        {
+            
+            console.log("xd",value)
+            
+            
+            $("#idEdit").val(value.id_usuario)
+            $("#idEdit").attr('placeholder', value.id_usuario)
 
-                $("#nombreCompletoEdit").val(value.nombre_completo)
-                $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
+            $("#nombreCompletoEdit").val(value.nombre_completo)
+            $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
 
-                $("#dniEdit").val(value.dni)
-                $("#dniEdit").attr('placeholder', value.dni)
+            $("#dniEdit").val(value.dni)
+            $("#dniEdit").attr('placeholder', value.dni)
 
-                $("#emailEdit").val(value.email)
-                $("#emailEdit").attr('placeholder', value.email)
+            $("#emailEdit").val(value.email)
+            $("#emailEdit").attr('placeholder', value.email)
 
-                $("#contrasennaEdit").val(value.contrasenna)
-                $("#contrasennaEdit").attr('placeholder', value.contrasenna)
+            $("#contrasennaEdit").val(value.contrasenna)
+            $("#contrasennaEdit").attr('placeholder', value.contrasenna)
 
-                $("#tipoUsuarioEdit").val(value.tipo_usuario)
-                $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
+            $("#tipoUsuarioEdit").val(value.tipo_usuario)
+            $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
 
-                $("#editData").on("click", function(){
+            $("#editData").on("click", function(){
 
-                    var editarDatos = $("#formEdit").serialize();
-                    $.ajax({
-                    url: "RenameUsuarios.php",
-                    type: "POST",
-                    data: editarDatos,
-                    success: function(r){
-                        if (r == 1) {
-                            
-                            alert("datos modificados con exito")
-                            return false;
-                            
-                        }
+                var editarDatos = $("#formEdit").serialize();
+                $.ajax({
+                url: "RenameUsuarios.php",
+                type: "POST",
+                data: editarDatos,
+                success: function(r){
+                    if (r == 1) {
                         
-                        }
-
-                    })
+                        alert("datos modificados con exito")
+                        return false;
+                        
+                    }
+                    
+                    }
 
                 })
 
-            }
+            })
+
+        }
+
+        function eliminartabla(value)
+        {
+                        
+            console.log("value: ", value)
+
+            $("#idDelete").val(value.id_usuario)
+            $("#idDelete").attr('placeholder', value.id_usuario)
+
+            $("#nombreCompletoDelete").val(value.nombre_completo)
+            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
+
+            $("#dniDelete").val(value.dni)
+            $("#dniDelete").attr('placeholder', value.dni)
+            
+            $("#emailDelete").val(value.email)
+            $("#emailDelete").attr('placeholder', value.email)
+            
+            $("#contrasennaDelete").val(value.contrasenna)
+            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
+            
+            $("#tipoUsuarioDelete").val(value.tipo_usuario)
+            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
+
+            $("#deleteData").click(function(){
+
+                var eliminarDatos = $("#formDelete").serialize();
+                $.ajax({
+                url: "DeleteUsuarios.php",
+                type: "POST",
+                data: eliminarDatos,
+                success: function(r){
+                    if (r == 1) {
+                        
+                        alert("datos Eliminados")
+                        return false;
+                        
+                    }
+                    
+                    }
+
+                })
+
+            })
+
+        }
 
         function cargarTabla()
         {   
@@ -375,6 +434,11 @@
                         $("#edit"+key).on("click", function(){
                             console.log(value)
                             editartabla(value)
+                        })
+
+                        $("#delete"+key).on("click", function(){
+                            console.log(value)
+                            eliminartabla(value)
                         })
                         
                         /*
@@ -423,7 +487,8 @@
                             
                         })
                         */
-                        /*----------funcion para eliminar datos----------*/
+                        /*----------funcion para eliminar datos----------
+
                         $("#delete"+key).on("click", function(){
                             
                             console.log("value: " +value)
@@ -431,20 +496,20 @@
                             $("#idDelete").val(value.id_usuario)
                             $("#idDelete").attr('placeholder', value.id_usuario)
 
-                            $("#nombreDelete").val(value.nombre_completo)
-                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
+                            $("#nombreCompletoDelete").val(value.nombre_completo)
+                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.dni)
-                            $("#apellidoDelete").attr('placeholder', value.dni)
+                            $("#dniDelete").val(value.dni)
+                            $("#dniDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.email)
-                            $("#telefonoDelete").attr('placeholder', value.email)
+                            $("#emailDelete").val(value.email)
+                            $("#emailDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.contrasenna)
-                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
+                            $("#contrasennaDelete").val(value.contrasenna)
+                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.tipo_usuario)
-                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
+                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
+                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
@@ -468,7 +533,7 @@
                             })
 
                         })
-
+                        */
                         key = key + 1
                         
                     })
@@ -605,20 +670,20 @@
                             $("#idDelete").val(value.id_alumno)
                             $("#idDelete").attr('placeholder', value.id_alumno)
 
-                            $("#nombreDelete").val(value.nombre_completo)
-                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
+                            $("#nombreCompletoDelete").val(value.nombre_completo)
+                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.dni)
-                            $("#apellidoDelete").attr('placeholder', value.dni)
+                            $("#dniDelete").val(value.dni)
+                            $("#dniDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.email)
-                            $("#telefonoDelete").attr('placeholder', value.email)
+                            $("#emailDelete").val(value.email)
+                            $("#emailDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.contrasenna)
-                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
+                            $("#contrasennaDelete").val(value.contrasenna)
+                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.tipo_usuario)
-                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
+                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
+                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
@@ -733,20 +798,20 @@
                             $("#idDelete").val(value.id_alumno)
                             $("#idDelete").attr('placeholder', value.id_alumno)
 
-                            $("#nombreDelete").val(value.nombre_completo)
-                            $("#nombreDelete").attr('placeholder', value.nombre_completo)
+                            $("#nombreCompletoDelete").val(value.nombre_completo)
+                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
 
-                            $("#apellidoDelete").val(value.dni)
-                            $("#apellidoDelete").attr('placeholder', value.dni)
+                            $("#dniDelete").val(value.dni)
+                            $("#dniDelete").attr('placeholder', value.dni)
                             
-                            $("#telefonoDelete").val(value.email)
-                            $("#telefonoDelete").attr('placeholder', value.email)
+                            $("#emailDelete").val(value.email)
+                            $("#emailDelete").attr('placeholder', value.email)
                             
-                            $("#fecha_nacDelete").val(value.contrasenna)
-                            $("#fecha_nacDelete").attr('placeholder', value.contrasenna)
+                            $("#contrasennaDelete").val(value.contrasenna)
+                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
                             
-                            $("#sexoDelete").val(value.tipo_usuario)
-                            $("#sexoDelete").attr('placeholder', value.tipo_usuario)
+                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
+                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
 
                             $("#deleteData").click(function(){
 
