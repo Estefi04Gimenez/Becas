@@ -38,6 +38,8 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!-- el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
 <!--17: 31-->
 <!-- La funcionalidad de eliminar datos ahora esta declarada en una funcion como "eliminartabla()" -->
+<!--19: 53-->
+<!-- La funcionalidad de dar de baja y editar datos ahora usan el mismo formulario en el mismo modal -->
 
 <!------Mejoras al programa------>
 <!--sin cambios-->
@@ -151,17 +153,17 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             </div>
             <div class="col-2">
                 <!-- The Modal -->
-                <div class="modal fade" id="modalEdit">
+                <div class="modal fade" id="modalAV">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form id="formEdit">
+                            <form id="formAV">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <div class="col-5">
                                         <h4 class="modal-title">Editar datos</h4>
                                     </div>
                                     <div class="col-2">
-                                        <label>id</label><input type="text" class="form-control" name="idEdit" id="idEdit" readonly>
+                                        <label>id</label><input type="text" class="form-control" name="idAV" id="idAV" readonly>
                                     </div>
                                     <div class="col-5 text-end">  
                                         <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -174,27 +176,27 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                <input name="nombreCompletoEdit" type="text" id="nombreCompletoEdit" placeholder="" class="form-control">        
+                                                <input name="nombreCompletoAV" type="text" id="nombreCompletoAV" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dniEdit" type="text" id="dniEdit" placeholder="" class="form-control"> 
+                                                <input name="dniAV" type="text" id="dniAV" placeholder="" class="form-control"> 
                                             </div>       
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Email</label>
-                                                <input name="emailEdit" type="text" id="emailEdit" placeholder="" class="form-control">        
+                                                <input name="emailAV" type="text" id="emailAV" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contrasennaEdit" type="text" id="contrasennaEdit"  class="form-control">       
+                                                <input name="contrasennaAV" type="text" id="contrasennaAV"  class="form-control">       
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuarioEdit" type="text" id="tipoUsuarioEdit" placeholder="" class="form-control">        
+                                                <input name="tipoUsuarioAV" type="text" id="tipoUsuarioAV" placeholder="" class="form-control">        
                                             </div>    
                                         </div>
                                     </div>
@@ -204,66 +206,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             <div class="modal-footer">
                                 <button id="closeModal2" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                                 <button id="editData" type="button" class="btn btn-primary xd" >enviar</button>
-                            </div>        
-                        </div>
-                    </div>  
-                </div>
-            </div>
-            <div class="col-2">
-                <!-- The Modal -->
-                <div class="modal fade" id="modalDelete">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form id="formDelete">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <div class="col-9">
-                                        <h6 class="modal-title">Esta seguro que quiere eliminar los siguientes datos de forma permanente</h6>
-                                    </div>
-                                    <div class="col-2 text-start">
-                                        <label>id</label><input type="text" class="form-control" name="idDelete" id="idDelete" readonly>
-                                    </div>
-                                    <div class="col text-end">  
-                                        <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                </div>
-                        
-                                <!-- Modal body -->
-                                <div class="container"> 
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Nombre completo</label>
-                                                <input name="nombreCompletoDelete" type="text" id="nombreCompletoDelete" placeholder="" class="form-control" readonly>        
-                                            </div>
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dniDelete" type="text" id="dniDelete" placeholder="" class="form-control" readonly>        
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Correo electronico</label>
-                                                <input name="emailDelete" type="text" id="emailDelete" placeholder="" class="form-control" readonly>        
-                                            </div>
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">contraseña</label>
-                                                <input name="contrasennaDelete" type="text" id="contrasennaDelete"  class="form-control" readonly>       
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuarioDelete" type="text" id="tipoUsuarioDelete" placeholder="" class="form-control" readonly>        
-                                            </div>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>  
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button id="closeModal3" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                                <button id="deleteData" type="button" class="btn btn-danger xd" data-bs-dismiss="modal">eliminar</button>
+                                <button id="deleteData" type="button" class="btn btn-danger xd" >eliminar</button>
                             </div>        
                         </div>
                     </div>  
@@ -308,30 +251,37 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
         function editartabla(value)
         {
             
+            $("#editData").show()
+            $("#deleteData").hide()
+
             console.log("xd",value)
             
+            $("#idAV").val(value.id_usuario)
+            $("#idAV").attr('placeholder', value.id_usuario) 
             
-            $("#idEdit").val(value.id_usuario)
-            $("#idEdit").attr('placeholder', value.id_usuario)
-
-            $("#nombreCompletoEdit").val(value.nombre_completo)
-            $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
-
-            $("#dniEdit").val(value.dni)
-            $("#dniEdit").attr('placeholder', value.dni)
-
-            $("#emailEdit").val(value.email)
-            $("#emailEdit").attr('placeholder', value.email)
-
-            $("#contrasennaEdit").val(value.contrasenna)
-            $("#contrasennaEdit").attr('placeholder', value.contrasenna)
-
-            $("#tipoUsuarioEdit").val(value.tipo_usuario)
-            $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
+            $("#nombreCompletoAV").val(value.nombre_completo)
+            $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
+            $("#nombreCompletoAV").attr('readonly', false)
+            
+            $("#dniAV").val(value.dni)
+            $("#dniAV").attr('placeholder', value.dni) 
+            $("#dniAV").attr('readonly', false)
+            
+            $("#emailAV").val(value.email)
+            $("#emailAV").attr('placeholder', value.email) 
+            $("#emailAV").attr('readonly', false)
+            
+            $("#contrasennaAV").val(value.contrasenna)
+            $("#contrasennaAV").attr('placeholder', value.contrasenna) 
+            $("#contrasennaAV").attr('readonly', false)
+            
+            $("#tipoUsuarioAV").val(value.tipo_usuario)
+            $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
+            $("#tipoUsuarioAV").attr('readonly', false)
 
             $("#editData").on("click", function(){
 
-                var editarDatos = $("#formEdit").serialize();
+                var editarDatos = $("#formAV").serialize();
                 $.ajax({
                 url: "RenameUsuarios.php",
                 type: "POST",
@@ -354,30 +304,38 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
         function eliminartabla(value)
         {
+            $("#deleteData").show()
+            $("#editData").hide()
                         
+
             console.log("value: ", value)
 
-            $("#idDelete").val(value.id_usuario)
-            $("#idDelete").attr('placeholder', value.id_usuario)
-
-            $("#nombreCompletoDelete").val(value.nombre_completo)
-            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
-
-            $("#dniDelete").val(value.dni)
-            $("#dniDelete").attr('placeholder', value.dni)
+            $("#idAV").val(value.id_usuario)
+            $("#idAV").attr('placeholder', value.id_usuario) 
             
-            $("#emailDelete").val(value.email)
-            $("#emailDelete").attr('placeholder', value.email)
+            $("#nombreCompletoAV").val(value.nombre_completo)
+            $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
+            $("#nombreCompletoAV").attr('readonly', true)
             
-            $("#contrasennaDelete").val(value.contrasenna)
-            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
+            $("#dniAV").val(value.dni)
+            $("#dniAV").attr('placeholder', value.dni) 
+            $("#dniAV").attr('readonly', true)
             
-            $("#tipoUsuarioDelete").val(value.tipo_usuario)
-            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
+            $("#emailAV").val(value.email)
+            $("#emailAV").attr('placeholder', value.email) 
+            $("#emailAV").attr('readonly', true)
+            
+            $("#contrasennaAV").val(value.contrasenna)
+            $("#contrasennaAV").attr('placeholder', value.contrasenna) 
+            $("#contrasennaAV").attr('readonly', true)
+            
+            $("#tipoUsuarioAV").val(value.tipo_usuario)
+            $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
+            $("#tipoUsuarioAV").attr('readonly', true)
 
             $("#deleteData").click(function(){
 
-                var eliminarDatos = $("#formDelete").serialize();
+                var eliminarDatos = $("#formAV").serialize();
                 $.ajax({
                 url: "DeleteUsuarios.php",
                 type: "POST",
@@ -427,8 +385,8 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                         "<td class='xd'>"+value.dni+"</td>"+
                         "<td class='xd'>"+value.contrasenna+"</td>"+
                         "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
                         "</tr>") 
                         
                         $("#edit"+key).on("click", function(){
@@ -441,99 +399,6 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             eliminartabla(value)
                         })
                         
-                        /*
-                        $("#edit"+key).click(function(){
-
-                            //alert("id: " + value.id_alumno)
-                            
-                            $("#idEdit").val(value.id_usuario)
-                            $("#idEdit").attr('placeholder', value.id_usuario)
-
-                            $("#nombreCompletoEdit").val(value.nombre_completo)
-                            $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
-
-                            $("#dniEdit").val(value.dni)
-                            $("#dniEdit").attr('placeholder', value.dni)
-                            
-                            $("#emailEdit").val(value.email)
-                            $("#emailEdit").attr('placeholder', value.email)
-                            
-                            $("#contrasennaEdit").val(value.contrasenna)
-                            $("#contrasennaEdit").attr('placeholder', value.contrasenna)
-                            
-                            $("#tipoUsuarioEdit").val(value.tipo_usuario)
-                            $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
-
-                            $("#editData").click(function(){
-
-                                var editarDatos = $("#formEdit").serialize();
-                                $.ajax({
-                                url: "RenameUsuarios.php",
-                                type: "POST",
-                                data: editarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos modificados con exito")
-                                        return false;
-                                        
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-                            
-                        })
-                        */
-                        /*----------funcion para eliminar datos----------
-
-                        $("#delete"+key).on("click", function(){
-                            
-                            console.log("value: " +value)
-
-                            $("#idDelete").val(value.id_usuario)
-                            $("#idDelete").attr('placeholder', value.id_usuario)
-
-                            $("#nombreCompletoDelete").val(value.nombre_completo)
-                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
-
-                            $("#dniDelete").val(value.dni)
-                            $("#dniDelete").attr('placeholder', value.dni)
-                            
-                            $("#emailDelete").val(value.email)
-                            $("#emailDelete").attr('placeholder', value.email)
-                            
-                            $("#contrasennaDelete").val(value.contrasenna)
-                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
-                            
-                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
-                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
-
-                            $("#deleteData").click(function(){
-
-                                var eliminarDatos = $("#formDelete").serialize();
-                                $.ajax({
-                                url: "DeleteUsuarios.php",
-                                type: "POST",
-                                data: eliminarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos Eliminados")
-                                        return false;
-                                        
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-
-                        })
-                        */
                         key = key + 1
                         
                     })
@@ -554,298 +419,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
         $("#ordenarNomb").keyup(function(){
             cargarTabla();
-        })
-
-        /*
-        $("#orderBy").change(function(){
-            var opt = $("#opcion").val()
-            if (opt != 0)
-            {
-            $.ajax({
-                url: "BackendAjax.php", //action
-                type: "POST", //method
-                data: {"opcion": opt},
-                dataType: "json",
-                success: function(respuesta){
-                 //console.log("each")
-                    $.each(respuesta, function(key, value){ 
-                        $("#tabla1").append("<tr>"+
-                        "<td class='xd'>"+value.id_alumno+"</td>"+
-                        "<td class='xd'>"+value.nombre+"</td>"+
-                        "<td class='xd'>"+value.apellido+"</td>"+
-                        "<td class='xd'>"+value.tel+"</td>"+
-                        "<td class='xd'>"+value.fecha_de_nacimiento+"</td>"+
-                        "<td class='xd'>"+value.sexo+"</td>"+
-                        "</tr>") 
-
-                    })
-                   
-                }
-                
-            })
-            }
-        })
-        */
-       /*
-       
-        //jquery envio de datos del formulario a php(con metodo $.ajax)
-        // console.log("pagina lista")
-        $("#ordenarNomb").keyup(function(){
-           //console.log("keypress")
-            $("#tabla1").empty()
-            var opt = $("#orderBy").val()
-            var l = $("#ordenarNomb").val()
-            if (l != ""){
-               //console.log("if")
-            $.ajax({
-                url: "BackendAjax5.php", //action
-                type: "POST", //method
-                data: {"letra": l, "opcion": opt},
-                dataType: "json",
-                success: function(respuesta){
-                 //console.log("each")
-                 var fv = 1
-                 
-                    $.each(respuesta, function(key, value){
-                        
-                        $("#tabla1").append("<tr id='fila"+fv+"'  >"+
-                        "<td class='xd'>"+value.id_usuario+"</td>"+
-                        "<td class='xd'>"+value.nombre_completo+"</td>"+
-                        "<td class='xd'>"+value.email+"</td>"+
-                        "<td class='xd'>"+value.dni+"</td>"+
-                        "<td class='xd'>"+value.contrasenna+"</td>"+
-                        "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
-                        "</tr>") 
-
-                        $("#edit"+fv).click(function(){
-
-                            //alert("id: " + value.id_alumno)
-                            
-                            $("#idEdit").val(value.id_alumno)
-                            $("#idEdit").attr('placeholder', value.id_alumno)
-
-                            $("#nombreEdit").val(value.nombre_completo)
-                            $("#nombreEdit").attr('placeholder', value.nombre_completo)
-
-                            $("#apellidoEdit").val(value.dni)
-                            $("#apellidoEdit").attr('placeholder', value.dni)
-                            
-                            $("#telefonoEdit").val(value.email)
-                            $("#telefonoEdit").attr('placeholder', value.email)
-                            
-                            $("#fecha_nacEdit").val(value.contrasenna)
-                            $("#fecha_nacEdit").attr('placeholder', value.contrasenna)
-                            
-                            $("#sexoEdit").val(value.tipo_usuario)
-                            $("#sexoEdit").attr('placeholder', value.tipo_usuario)
-
-                            $("#editData").click(function(){
-
-                                var editarDatos = $("#formEdit").serialize();
-                                $.ajax({
-                                url: "BackendAjax5_EditData.php",
-                                type: "POST",
-                                data: editarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos modificados con exito")
-                                        return false;
-                                        
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-                            
-                        })
-
-                        ----------funcion para eliminar datos----------
-                        $("#delete"+fv).click(function(){
-                            
-                            $("#idDelete").val(value.id_alumno)
-                            $("#idDelete").attr('placeholder', value.id_alumno)
-
-                            $("#nombreCompletoDelete").val(value.nombre_completo)
-                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
-
-                            $("#dniDelete").val(value.dni)
-                            $("#dniDelete").attr('placeholder', value.dni)
-                            
-                            $("#emailDelete").val(value.email)
-                            $("#emailDelete").attr('placeholder', value.email)
-                            
-                            $("#contrasennaDelete").val(value.contrasenna)
-                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
-                            
-                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
-                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
-
-                            $("#deleteData").click(function(){
-
-                                var eliminarDatos = $("#formDelete").serialize();
-                                $.ajax({
-                                url: "BackendAjax5_DeleteData.php",
-                                type: "POST",
-                                data: eliminarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos Eliminados")
-                                        return false;
-                                        
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-
-                        })
-
-                        fv = fv + 1
-                        
-                    })
-                    
-                }
-                
-            })
-            }
-            
-        })
-        
-        $("#orderBy").change(function(){
-           //console.log("keypress")
-            $("#tabla1").empty()
-            var opt = $("#orderBy").val()
-            var p = $("#ordenarNomb").val()
-            if (p != ""){
-               //console.log("if")
-            $.ajax({
-                url: "BackendAjax5.php", //action
-                type: "POST", //method
-                data: {"alumnos3": p, "opcion": opt},
-                dataType: "json",
-                success: function(respuesta){
-                 //console.log("each")
-                 var fv = 1
-
-                    $.each(respuesta, function(key, value){ 
-                        $("#tabla1").append("<tr>"+
-                        "<td class='xd'>"+value.id_alumno+"</td>"+
-                        "<td class='xd'>"+value.nombre+"</td>"+
-                        "<td class='xd'>"+value.apellido+"</td>"+
-                        "<td class='xd'>"+value.tel+"</td>"+
-                        "<td class='xd'>"+value.fecha_de_nacimiento+"</td>"+
-                        "<td class='xd'>"+value.sexo+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../img/IconoBasura.png'>"+"</td>"+
-                        "</tr>") 
-
-                        $("#edit"+fv).click(function(){
-                           
-                            //alert("id: " + value.id_alumno)
-                            
-                            $("#idEdit").val(value.id_alumno)
-                            $("#idEdit").attr('placeholder', value.id_alumno)
-
-                            $("#nombreEdit").val(value.nombre_completo)
-                            $("#nombreEdit").attr('placeholder', value.nombre_completo)
-
-                            $("#apellidoEdit").val(value.dni)
-                            $("#apellidoEdit").attr('placeholder', value.dni)
-                            
-                            $("#telefonoEdit").val(value.email)
-                            $("#telefonoEdit").attr('placeholder', value.email)
-                            
-                            $("#fecha_nacEdit").val(value.contrasenna)
-                            $("#fecha_nacEdit").attr('placeholder', value.contrasenna)
-                            
-                            $("#sexoEdit").val(value.tipo_usuario)
-                            $("#sexoEdit").attr('placeholder', value.tipo_usuario)
-
-                            $("#editData").click(function(){
-
-                                var editarDatos = $("#formEdit").serialize();
-                                $.ajax({
-                                url: "BackendAjax5_EditData.php",
-                                type: "POST",
-                                data: editarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos modificados con exito")
-                                        return false;
-
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-                            
-                        })
-
-                        ----------funcion para eliminar datos----------
-                        $("#delete"+fv).click(function(){
-                            
-                            $("#idDelete").val(value.id_alumno)
-                            $("#idDelete").attr('placeholder', value.id_alumno)
-
-                            $("#nombreCompletoDelete").val(value.nombre_completo)
-                            $("#nombreCompletoDelete").attr('placeholder', value.nombre_completo)
-
-                            $("#dniDelete").val(value.dni)
-                            $("#dniDelete").attr('placeholder', value.dni)
-                            
-                            $("#emailDelete").val(value.email)
-                            $("#emailDelete").attr('placeholder', value.email)
-                            
-                            $("#contrasennaDelete").val(value.contrasenna)
-                            $("#contrasennaDelete").attr('placeholder', value.contrasenna)
-                            
-                            $("#tipoUsuarioDelete").val(value.tipo_usuario)
-                            $("#tipoUsuarioDelete").attr('placeholder', value.tipo_usuario)
-
-                            $("#deleteData").click(function(){
-
-                                var eliminarDatos = $("#formDelete").serialize();
-                                $.ajax({
-                                url: "BackendAjax5_DeleteData.php",
-                                type: "POST",
-                                data: eliminarDatos,
-                                success: function(r){
-                                    if (r == 1) {
-                                        
-                                        alert("datos Eliminados")
-                                        return false;
-                                        
-                                    }
-                                    
-                                    }
-
-                                })
-
-                            })
-
-                        })
-
-                        fv = fv + 1
-
-                    })
-                   
-                }
-                
-            })
-            }
-        })
-       */
+        })     
    })
 
 
