@@ -14,12 +14,20 @@
 <!-- cambios a las etiquetas label de "myModal", "MmdalEdit" y "MmdalDelete" para que sean iguales a los campos de la tabla usuarios  -->
 <!-- cambios a los parametros id y name de los input de "myModal", "MmdalEdit" y "MmdalDelete" para implementar las funciones correspondientes a cada uno  -->
 
-<!------Mejoras a la estructura del codigo------>
+<!------Cambios a la estructura del codigo------>
 <!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada en la linea 285 como "function cargarTabla()".
      Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
 
 <!------Mejoras al programa------>
-<!-- Ahora la tabla se recarga al dar de alta  -->
+        <!-- Ahora la tabla se recarga al dar de alta  -->
+
+
+<!--18/8-->
+
+<!------Cambios a la estructura del codigo------>
+<!--15: 46-->
+<!-- La funcionalidad de Editar datos ahora esta en la funcion editartabla() declarada en la linea 292-->
+<!-- el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
 
 <html lang="en">
 <head>
@@ -257,18 +265,6 @@
     
     $(document).ready(function(){
 
-        /*
-       $("#botonModal").click(function(){
-           $("#myModal").show()//fadeIn(200)//show()//
-       })
-       $("#closeModal").click(function(){
-           $("#myModal").hide()//fadeOut(200)//
-       })
-       $("#closeModal2").click(function(){
-           $("#myModal").hide()//fadeOut(200)//hide()//
-       })
-       */
-
 
        /*----------Formulario del modal para añadir datos----------*/
        $("#addData").click(function(){
@@ -295,6 +291,54 @@
             
         })
 
+
+        function editartabla(value)
+            {
+                
+                console.log("xd",value)
+                
+                
+                $("#idEdit").val(value.id_usuario)
+                $("#idEdit").attr('placeholder', value.id_usuario)
+
+                $("#nombreCompletoEdit").val(value.nombre_completo)
+                $("#nombreCompletoEdit").attr('placeholder', value.nombre_completo)
+
+                $("#dniEdit").val(value.dni)
+                $("#dniEdit").attr('placeholder', value.dni)
+
+                $("#emailEdit").val(value.email)
+                $("#emailEdit").attr('placeholder', value.email)
+
+                $("#contrasennaEdit").val(value.contrasenna)
+                $("#contrasennaEdit").attr('placeholder', value.contrasenna)
+
+                $("#tipoUsuarioEdit").val(value.tipo_usuario)
+                $("#tipoUsuarioEdit").attr('placeholder', value.tipo_usuario)
+
+                $("#editData").on("click", function(){
+
+                    var editarDatos = $("#formEdit").serialize();
+                    $.ajax({
+                    url: "RenameUsuarios.php",
+                    type: "POST",
+                    data: editarDatos,
+                    success: function(r){
+                        if (r == 1) {
+                            
+                            alert("datos modificados con exito")
+                            return false;
+                            
+                        }
+                        
+                        }
+
+                    })
+
+                })
+
+            }
+
         function cargarTabla()
         {   
             $("#tabla1").empty()
@@ -306,25 +350,35 @@
                 url: "BackendUsuarios.php", //action
                 type: "POST", //method
                 data: {"letra": l, "opcion": opt},
-                dataType: "json",
+                //dataType: "json",
                 success: function(respuesta){
-                 //console.log("each")
-                 var fv = 1
                  
-                    $.each(respuesta, function(key, value){
-                        
-                        $("#tabla1").append("<tr id='fila"+fv+"'  >"+
+                 var box = JSON.parse(respuesta) 
+                 console.log("xd:",box)
+
+                    $.each(box, function(key, value){
+                        //console.log("Respuesta: " + respuesta)
+                        console.log("Key: " , key)
+                        console.log("Value: " , value)
+
+                        $("#tabla1").append("<tr id='fila"+key+"'  >"+
                         "<td class='xd'>"+value.id_usuario+"</td>"+
                         "<td class='xd'>"+value.nombre_completo+"</td>"+
                         "<td class='xd'>"+value.email+"</td>"+
                         "<td class='xd'>"+value.dni+"</td>"+
                         "<td class='xd'>"+value.contrasenna+"</td>"+
                         "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='edit"+fv+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center' id='delete"+fv+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalEdit' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                        "<td class='xd'>"+"<button class='btn text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalDelete' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
                         "</tr>") 
-
-                        $("#edit"+fv).click(function(){
+                        
+                        $("#edit"+key).on("click", function(){
+                            console.log(value)
+                            editartabla(value)
+                        })
+                        
+                        /*
+                        $("#edit"+key).click(function(){
 
                             //alert("id: " + value.id_alumno)
                             
@@ -368,10 +422,12 @@
                             })
                             
                         })
-
+                        */
                         /*----------funcion para eliminar datos----------*/
-                        $("#delete"+fv).click(function(){
+                        $("#delete"+key).on("click", function(){
                             
+                            console.log("value: " +value)
+
                             $("#idDelete").val(value.id_usuario)
                             $("#idDelete").attr('placeholder', value.id_usuario)
 
@@ -413,7 +469,7 @@
 
                         })
 
-                        fv = fv + 1
+                        key = key + 1
                         
                     })
                     
@@ -423,6 +479,9 @@
             }
             
         }
+
+       
+        
         
         $("#orderBy").change(function(){
             cargarTabla();
