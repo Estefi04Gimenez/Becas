@@ -60,6 +60,10 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--15: 21-->
 <!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
 
+<!------Mejoras al programa------>
+<!--16: 30-->
+<!-- Ahora, al dar de alta o editar se muestra el registro en la tabla-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -240,19 +244,23 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 $(document).ready(function()
 {
     $("#addData").click(function(){
-    var datos = $('#formAdd').serialize();
+
+    var datos = $('#formAdd').serializeArray();
+    //console.log("datos:",datos)
         $.ajax({
             type:"POST",
             url:"addUsuarios.php",
             data: datos,
             success:function(r){
-                if(r == 1){
+                if(r == 1)
+                {
                     alert("agregado con exito");
-                    var r = 1
+                    $("#ordenarNomb").val(nombreCompleto.value)
                     cargarTabla();
-                }else{
-                    alert("Fallo ");
-                    var cut = 1
+                    $("#myModal").modal('hide')
+                }else
+                {
+                    alert("Fallo");
                 }
             }
         })
@@ -272,13 +280,14 @@ $(document).ready(function()
                 {
 
                 alert("datos modificados con exito")
+                $("#ordenarNomb").val(nombreCompletoAV.value)
                 cargarTabla()
                 $("#modalAV").modal('hide')
 
                 }
             }
-
         })
+
     }
 
     function confirmDelete()
