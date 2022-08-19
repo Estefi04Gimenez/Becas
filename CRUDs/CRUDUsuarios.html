@@ -135,7 +135,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contraseña" type="text" id="contraseña" min="0" max="255" class="form-control">       
+                                                <input name="contraseña" type="text" id="contrasenna" min="0" max="255" class="form-control">       
                                             </div>
                                         </div>
                                         <div class="row">
@@ -252,9 +252,15 @@ $(document).ready(function()
 
     $("#addData").click(function(){
     
-    var datos = $('#formAdd').serializeArray();
-    //console.log("datos:",datos)
-        $.ajax({
+    var datos = $('#formAdd').serializeArray();tipoUsuario
+    console.log("datos:", datos)
+    console.log("nombreCompleto", nombreCompleto.value )
+    console.log("dni", dni.value)
+    console.log("email", email.value)
+    console.log("contrasenna", contrasenna.value) 
+    console.log("tipoUsuario", tipoUsuario.value)
+    
+        /*$.ajax({
             type:"POST",
             url:"addUsuarios.php",
             data: datos,
@@ -270,7 +276,7 @@ $(document).ready(function()
                     alert("Fallo");
                 }
             }
-        })
+        })*/
     })
 
     function confirmEdit()
