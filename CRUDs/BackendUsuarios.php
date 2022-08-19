@@ -7,24 +7,24 @@ $q = "SELECT * FROM usuarios WHERE UPPER(nombre_completo) LIKE '%" . strtoupper(
 //$q = "select * from alumnos3";
 
 
-/*
+
 if($opcion == 1)
 {
-  $q = $q."ORDER BY fecha_de_nacimiento ASC";
+$q = $q."ORDER BY dni ASC";
 }
 if($opcion == 2)
 {
-  $q = $q."ORDER BY fecha_de_nacimiento DESC";
+$q = $q."ORDER BY dni DESC";
 }
 if($opcion == 3)
 {
-  $q = $q."ORDER BY id_alumno ASC";
+  $q = $q."ORDER BY id_usuario ASC";
 }
 if($opcion == 4)
 {
-  $q = $q."ORDER BY id_alumno DESC";
+  $q = $q."ORDER BY id_usuario DESC";
 }
-*/
+
 $r = mysqli_query($con, $q);
 //se arma un array asociativo(nombre campo , valor) que despues se
 //va a trasformar en un json para devolver

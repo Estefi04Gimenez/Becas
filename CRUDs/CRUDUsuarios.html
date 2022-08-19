@@ -56,13 +56,19 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 <!--19/8-->
 
+<!------Cambios al programa------>
+
+<!------Cambios a la interfaz------>
+<!--18: 50-->
+<!-- ahora se puede cambiar la forma en la que se organiza la informacion de los registros al cargar la tabla -->
+
 <!------Cambios a la estructura del codigo------>
 <!--15: 21-->
 <!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
 
 <!------Mejoras al programa------>
 <!--16: 30-->
-<!-- Ahora, al dar de alta o editar se muestra el registro en la tabla-->
+<!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
 
 <html lang="en">
 <head>
@@ -88,8 +94,8 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             <div class="col-2">
                 <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
                     <option class="form-control altura" value="0">Ordenar por...</option>
-                    <option class="form-control altura" value="1">Fecha de nacimiento ↑</option>
-                    <option class="form-control altura" value="2">Fecha de nacimiento ↓</option>
+                    <option class="form-control altura" value="1">DNI ↑</option>
+                    <option class="form-control altura" value="2">DNI ↓</option>
                     <option class="form-control altura" value="3">Id ↑</option>
                     <option class="form-control altura" value="4">Id ↓</option>
                 </select>
@@ -115,27 +121,27 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                <input name="nombreCompleto" type="text" id="nombreCompleto" placeholder="" class="form-control">        
+                                                <input name="nombreCompleto" type="text" id="nombreCompleto" min="0" max="255" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dni" type="text" id="dni" placeholder="" class="form-control">        
+                                                <input name="dni" type="text" id="dni" min="0" max="11" placeholder="" class="form-control">        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Email</label>
-                                                <input name="email" type="text" id="email" placeholder="" class="form-control">        
+                                                <input name="email" type="text" id="email" min="0" max="255" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contraseña" type="text" id="contraseña"  class="form-control">       
+                                                <input name="contraseña" type="text" id="contraseña" min="0" max="255" class="form-control">       
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuario" type="text" id="tipoUsuario" placeholder="" class="form-control">        
+                                                <input name="tipoUsuario" type="text" id="tipoUsuario" min="0" max="1" placeholder="" class="form-control">        
                                             </div>    
                                         </div>
                                     </div>
@@ -197,27 +203,27 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                <input name="nombreCompletoAV" type="text" id="nombreCompletoAV" placeholder="" class="form-control">        
+                                                <input name="nombreCompletoAV" min="0" max="255" type="text" id="nombreCompletoAV" placeholder=""  class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dniAV" type="text" id="dniAV" placeholder="" class="form-control"> 
+                                                <input name="dniAV" type="text" id="dniAV" min="0" max="11" placeholder="" class="form-control"> 
                                             </div>       
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Email</label>
-                                                <input name="emailAV" type="text" id="emailAV" placeholder="" class="form-control">        
+                                                <input name="emailAV" type="text" min="0" max="255" id="emailAV" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contrasennaAV" type="text" id="contrasennaAV"  class="form-control">       
+                                                <input name="contrasennaAV" type="text" min="0" max="255" id="contrasennaAV"  class="form-control">       
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuarioAV" type="text" id="tipoUsuarioAV" placeholder="" class="form-control">        
+                                                <input name="tipoUsuarioAV" type="text" min="0" max="1" id="tipoUsuarioAV" placeholder="" class="form-control">        
                                             </div>    
                                         </div>
                                     </div>
@@ -243,8 +249,9 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
     
 $(document).ready(function()
 {
-    $("#addData").click(function(){
 
+    $("#addData").click(function(){
+    
     var datos = $('#formAdd').serializeArray();
     //console.log("datos:",datos)
         $.ajax({
@@ -429,11 +436,11 @@ $(document).ready(function()
                     
                     key = key + 1
                     
-                })
+                    })
                 
-            }
+                }
             
-        })
+            })
         }
         
     }
