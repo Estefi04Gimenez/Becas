@@ -53,6 +53,13 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--23: 26-->
 <!-- Ahora la tabla se recarga al dar de baja o editar 
     Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
+
+<!--19/8-->
+
+<!------Cambios a la estructura del codigo------>
+<!--15: 21-->
+<!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -230,201 +237,206 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <script>
 
     
-   $(document).ready(function()
-   {
-       $("#addData").click(function(){
-        var datos = $('#formAdd').serialize();
-			$.ajax({
-				type:"POST",
-				url:"addUsuarios.php",
-				data: datos,
-				success:function(r){
-					if(r == 1){
-						alert("agregado con exito");
-                        var r = 1
-                        cargarTabla();
-					}else{
-						alert("Fallo ");
-                        var cut = 1
-					}
-				}
-			})
+$(document).ready(function()
+{
+    $("#addData").click(function(){
+    var datos = $('#formAdd').serialize();
+        $.ajax({
+            type:"POST",
+            url:"addUsuarios.php",
+            data: datos,
+            success:function(r){
+                if(r == 1){
+                    alert("agregado con exito");
+                    var r = 1
+                    cargarTabla();
+                }else{
+                    alert("Fallo ");
+                    var cut = 1
+                }
+            }
         })
-        function confirmEdit()
+    })
+
+    function confirmEdit()
+    {
+    var editarDatos = $("#formAV").serializeArray();
+        //console.log("editarDatos: ", editarDatos)
+        $.ajax({
+        url: "RenameUsuarios.php",
+        type: "POST",
+        data: editarDatos,
+        success: function(r)
         {
-        var editarDatos = $("#formAV").serialize();
-            $.ajax({
-            url: "RenameUsuarios.php",
-            type: "POST",
-            data: editarDatos,
-            success: function(r){
-                if (r == 1) 
-                    {
+            if (r == 1) 
+                {
 
-                    alert("datos modificados con exito")
-                    cargarTabla()
-                    $("#modalAV").modal('hide')
+                alert("datos modificados con exito")
+                cargarTabla()
+                $("#modalAV").modal('hide')
 
-                    }
                 }
+            }
 
-            })
-        }
+        })
+    }
 
-        function confirmDelete()
-        {
-            var eliminarDatos = $("#formAV").serialize();
-            $.ajax({
-            url: "DeleteUsuarios.php",
-            type: "POST",
-            data: eliminarDatos,
-            success: function(r){
-                if (r == 1) 
-                    {
-                    
-                    alert("datos Eliminados")
-                    cargarTabla()
-                    $("#modalAV").modal('hide')
-                    
-                    }
+    function confirmDelete()
+    {
+        var eliminarDatos = $("#formAV").serializeArray();
+        //console.log("editarDatos: ", eliminarDatos)
+        $.ajax({
+        url: "DeleteUsuarios.php",
+        type: "POST",
+        data: eliminarDatos,
+        success: function(r){
+            if (r == 1) 
+                {
+                
+                alert("datos Eliminados")
+                cargarTabla()
+                $("#modalAV").modal('hide')
+                
                 }
-            })
-        }
+            }
+        })
+    }
 
-        $("#editData").on("click", function(){confirmEdit()}) 
-        $("#deleteData").on("click", function(){confirmDelete()}) 
-        //$("#closemodalAV2")
-        //$("#closemodalAV")
+    $("#editData").on("click", function(){confirmEdit()}) 
+    $("#deleteData").on("click", function(){confirmDelete()}) 
+    //$("#closemodalAV2")
+    //$("#closemodalAV")
 
-        function cargarFormEdit(value)
-        {
-            
-            $("#editData").show()
-            $("#deleteData").hide()
+    function cargarFormEdit(value)
+    {
+        
+        //$("#ordenarNomb").val('')
+        $("#editData").show()
+        $("#deleteData").hide()
 
-            console.log("xd",value)
-            
-            $("#idAV").val(value.id_usuario)
-            $("#idAV").attr('placeholder', value.id_usuario) 
-            
-            $("#nombreCompletoAV").val(value.nombre_completo)
-            $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-            $("#nombreCompletoAV").attr('readonly', false)
-            
-            $("#dniAV").val(value.dni)
-            $("#dniAV").attr('placeholder', value.dni) 
-            $("#dniAV").attr('readonly', false)
-            
-            $("#emailAV").val(value.email)
-            $("#emailAV").attr('placeholder', value.email) 
-            $("#emailAV").attr('readonly', false)
-            
-            $("#contrasennaAV").val(value.contrasenna)
-            $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-            $("#contrasennaAV").attr('readonly', false)
-            
-            $("#tipoUsuarioAV").val(value.tipo_usuario)
-            $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-            $("#tipoUsuarioAV").attr('readonly', false)
+        console.log("xd",value)
+        
+        $("#idAV").val(value.id_usuario)
+        $("#idAV").attr('placeholder', value.id_usuario) 
+        
+        $("#nombreCompletoAV").val(value.nombre_completo)
+        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombreCompletoAV").attr('readonly', false)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', false)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', false)
+        
+        $("#contrasennaAV").val(value.contrasenna)
+        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
+        $("#contrasennaAV").attr('readonly', false)
+        
+        $("#tipoUsuarioAV").val(value.tipo_usuario)
+        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
+        $("#tipoUsuarioAV").attr('readonly', false)
 
-        }
+    }
 
-        function cargarFormDelete(value)
-        {
-            $("#deleteData").show()
-            $("#editData").hide()
-                        
+    function cargarFormDelete(value)
+    {
+        $("#deleteData").show()
+        $("#editData").hide()
+                    
 
-            console.log("value: ", value)
+        console.log("value: ", value)
 
-            $("#idAV").val(value.id_usuario)
-            $("#idAV").attr('placeholder', value.id_usuario) 
-            
-            $("#nombreCompletoAV").val(value.nombre_completo)
-            $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-            $("#nombreCompletoAV").attr('readonly', true)
-            
-            $("#dniAV").val(value.dni)
-            $("#dniAV").attr('placeholder', value.dni) 
-            $("#dniAV").attr('readonly', true)
-            
-            $("#emailAV").val(value.email)
-            $("#emailAV").attr('placeholder', value.email) 
-            $("#emailAV").attr('readonly', true)
-            
-            $("#contrasennaAV").val(value.contrasenna)
-            $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-            $("#contrasennaAV").attr('readonly', true)
-            
-            $("#tipoUsuarioAV").val(value.tipo_usuario)
-            $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-            $("#tipoUsuarioAV").attr('readonly', true)
+        $("#idAV").val(value.id_usuario)
+        $("#idAV").attr('placeholder', value.id_usuario) 
+        
+        $("#nombreCompletoAV").val(value.nombre_completo)
+        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombreCompletoAV").attr('readonly', true)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', true)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', true)
+        
+        $("#contrasennaAV").val(value.contrasenna)
+        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
+        $("#contrasennaAV").attr('readonly', true)
+        
+        $("#tipoUsuarioAV").val(value.tipo_usuario)
+        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
+        $("#tipoUsuarioAV").attr('readonly', true)
 
 
-        }
+    }
 
-        function cargarTabla()
-        {   
-            $("#tabla1").empty()
-            var opt = $("#orderBy").val()
-            var l = $("#ordenarNomb").val()
-            if (l != ""){
-               //console.log("if")
+    function cargarTabla()
+    {   
+        $("#tabla1").empty()
+        var opt = $("#orderBy").val()
+        var l = $("#ordenarNomb").val()
+        if (l != ""){
+            //console.log("if")
             $.ajax({
-                url: "BackendUsuarios.php", //action
-                type: "POST", //method
-                data: {"letra": l, "opcion": opt},
-                //dataType: "json",
-                success: function(respuesta){
-                 
-                 var box = JSON.parse(respuesta) 
-                 console.log("xd:",box)
+            url: "BackendUsuarios.php", //action
+            type: "POST", //method
+            data: {"letra": l, "opcion": opt},
+            //dataType: "json",
+            success: function(respuesta){
+                
+                var box = JSON.parse(respuesta) 
+                console.log("xd:",box)
 
-                    $.each(box, function(key, value){
-                        //console.log("Respuesta: " + respuesta)
-                        console.log("Key: " , key)
-                        console.log("Value: " , value)
+                $.each(box, function(key, value){
+                    //console.log("Respuesta: " + respuesta)
+                    console.log("Key: " , key)
+                    console.log("Value: " , value)
 
-                        $("#tabla1").append("<tr id='fila"+key+"'  >"+
-                        "<td class='xd'>"+value.id_usuario+"</td>"+
-                        "<td class='xd'>"+value.nombre_completo+"</td>"+
-                        "<td class='xd'>"+value.email+"</td>"+
-                        "<td class='xd'>"+value.dni+"</td>"+
-                        "<td class='xd'>"+value.contrasenna+"</td>"+
-                        "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                        "<td class='xd'>"+"<button class='btn text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
-                        "</tr>") 
-                        
-                        $("#edit"+key).on("click", function(){
-                            console.log(value)
-                            cargarFormEdit(value)
-                        })
+                    $("#tabla1").append("<tr id='fila"+key+"'  >"+
+                    "<td class='xd'>"+value.id_usuario+"</td>"+
+                    "<td class='xd'>"+value.nombre_completo+"</td>"+
+                    "<td class='xd'>"+value.email+"</td>"+
+                    "<td class='xd'>"+value.dni+"</td>"+
+                    "<td class='xd'>"+value.contrasenna+"</td>"+
+                    "<td class='xd'>"+value.tipo_usuario+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                    "</tr>") 
+                    
+                    $("#edit"+key).on("click", function(){
+                        console.log(value)
+                        cargarFormEdit(value)
+                    })
 
-                        $("#delete"+key).on("click", function(){
-                            console.log(value)
-                            cargarFormDelete(value)
-                        })
-                        
-                        key = key + 1
-                        
+                    $("#delete"+key).on("click", function(){
+                        console.log(value)
+                        cargarFormDelete(value)
                     })
                     
-                }
+                    key = key + 1
+                    
+                })
                 
-            })
             }
             
-        }
-
-        $("#orderBy").change(function(){
-            cargarTabla();
         })
+        }
+        
+    }
 
-        $("#ordenarNomb").keyup(function(){
-            cargarTabla();
-        })     
-   })
+    $("#orderBy").change(function(){
+        cargarTabla();
+    })
+
+    $("#ordenarNomb").keyup(function(){
+        cargarTabla();
+    })     
+})
 
 
 
@@ -437,8 +449,8 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 .iconsize
 {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
 }
 
 .altura

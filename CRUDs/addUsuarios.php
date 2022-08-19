@@ -10,9 +10,6 @@ $contra = $_POST['contraseña'];
 $tipo = $_POST['tipoUsuario'];
 
 
-
-
-
 $q = "INSERT INTO `usuarios`(`nombre_completo`, `email`, `dni`, `contrasenna`, `tipo_usuario`) VALUES ('$nomComp','$email','$dni','$contra','$tipo')";
 
 echo mysqli_query($con, $q);
