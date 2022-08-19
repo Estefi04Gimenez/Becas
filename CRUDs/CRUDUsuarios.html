@@ -28,21 +28,30 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!------Cambios al programa------>
 <!--17: 31-->
 <!--implementada la funcion para dar de baja una fila-->
+<!--23: 26-->
+<!--modalAV ahor se oculta al dar de baja o alta-->
 
 <!------Cambios a la interfaz------>
-<!--sin cambios-->
-
-<!------Cambios a la estructura del codigo------>
-<!--15: 46-->
-<!-- La funcionalidad de editar datos ahora esta declarada en una funcion como "editartabla()"" -->
-<!-- el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
-<!--17: 31-->
-<!-- La funcionalidad de eliminar datos ahora esta declarada en una funcion como "eliminartabla()" -->
 <!--19: 53-->
 <!-- La funcionalidad de dar de baja y editar datos ahora usan el mismo formulario en el mismo modal -->
 
+<!------Cambios a la estructura del codigo------>
+<!--15: 46-->
+<!--La funcionalidad de editar datos fue agregada en una funcion declarada como "loadFormedit()"" -->
+<!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
+<!--17: 31-->
+<!--La funcionalidad de eliminar datos fue agregada en una funcion declarada como "cargarFormDelete()" -->
+<!--23: 06-->
+<!--consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" agregadas a las funciones declaradas como "confirmEdit()" y "confirmDelete()"
+    Esto permite solucionar error en el que las consultas de ajax se repetien el numero de veces que se hacia click en los botones de editar y/o borrar-->
+
 <!------Mejoras al programa------>
-<!--sin cambios-->
+<!--23: 06-->
+<!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
+    confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
+<!--23: 26-->
+<!-- Ahora la tabla se recarga al dar de baja o editar 
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -84,7 +93,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Añadir datos</h4>
-                                <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <button id="closeModal(1)" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                         
                             <!-- Modal body -->
@@ -123,7 +132,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
                             <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button id="closeModal2" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button id="closeModal2(1)" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button id="addData" type="button" class="btn btn-primary xd" data-bs-dismiss="modal">enviar</button>
                         </div>        
                     </div>
@@ -141,7 +150,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             <th class='xd'>Email</th>
                             <th class='xd'>Contraseña</th>
                             <th class='xd'>Tipo de usuario</th>
-                            <th class='xd'>Datos Personales</th>
+                            <!-- th class='xd'>Datos Personales</th -->
                             <th class='xd'>Editar</th>
                             <th class='xd'>Eliminar</th>
                         </tr>
@@ -166,7 +175,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <label>id</label><input type="text" class="form-control" name="idAV" id="idAV" readonly>
                                     </div>
                                     <div class="col-5 text-end">  
-                                        <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        <button id="closeModalAV" type="button" onclick="" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                 </div>
                         
@@ -204,7 +213,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             </form>  
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button id="closeModal2" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button id="closeModalAV2" type="button" class="btn btn-danger"  data-bs-dismiss="modal">Cancelar</button>
                                 <button id="editData" type="button" class="btn btn-primary xd" >enviar</button>
                                 <button id="deleteData" type="button" class="btn btn-danger xd" >eliminar</button>
                             </div>        
@@ -213,16 +222,15 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
 
 <script>
 
     
-    $(document).ready(function(){
-
-
-       /*----------Formulario del modal para añadir datos----------*/
+   $(document).ready(function()
+   {
        $("#addData").click(function(){
         var datos = $('#formAdd').serialize();
 			$.ajax({
@@ -240,15 +248,65 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 					}
 				}
 			})
-
-            
-            
-
-            
         })
-        
+        /* funcion inecesaria(?
+        function clearForm(){
+            $("#idAV").val('')
+            $("#nombreCompletoAV").val('')
+            $("#dniAV").val('')
+            $("#emailAV").val('')
+            $("#contrasennaAV").val('')
+            $("#tipoUsuarioAV").val('')
 
-        function editartabla(value)
+        }
+        */
+        function confirmEdit()
+        {
+        var editarDatos = $("#formAV").serialize();
+            $.ajax({
+            url: "RenameUsuarios.php",
+            type: "POST",
+            data: editarDatos,
+            success: function(r){
+                if (r == 1) 
+                    {
+
+                    alert("datos modificados con exito")
+                    cargarTabla()
+                    $("#modalAV").modal('hide')
+
+                    }
+                }
+
+            })
+        }
+
+        function confirmDelete()
+        {
+            var eliminarDatos = $("#formAV").serialize();
+            $.ajax({
+            url: "DeleteUsuarios.php",
+            type: "POST",
+            data: eliminarDatos,
+            success: function(r){
+                if (r == 1) 
+                    {
+                    
+                    alert("datos Eliminados")
+                    cargarTabla()
+                    $("#modalAV").modal('hide')
+                    
+                    }
+                }
+            })
+        }
+
+        $("#editData").on("click", function(){confirmEdit()}) 
+        $("#deleteData").on("click", function(){confirmDelete()}) 
+        //$("#closemodalAV2")
+        //$("#closemodalAV")
+
+        function cargarFormEdit(value)
         {
             
             $("#editData").show()
@@ -279,30 +337,9 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
             $("#tipoUsuarioAV").attr('readonly', false)
 
-            $("#editData").on("click", function(){
-
-                var editarDatos = $("#formAV").serialize();
-                $.ajax({
-                url: "RenameUsuarios.php",
-                type: "POST",
-                data: editarDatos,
-                success: function(r){
-                    if (r == 1) {
-                        
-                        alert("datos modificados con exito")
-                        return false;
-                        
-                    }
-                    
-                    }
-
-                })
-
-            })
-
         }
 
-        function eliminartabla(value)
+        function cargarFormDelete(value)
         {
             $("#deleteData").show()
             $("#editData").hide()
@@ -333,26 +370,6 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
             $("#tipoUsuarioAV").attr('readonly', true)
 
-            $("#deleteData").click(function(){
-
-                var eliminarDatos = $("#formAV").serialize();
-                $.ajax({
-                url: "DeleteUsuarios.php",
-                type: "POST",
-                data: eliminarDatos,
-                success: function(r){
-                    if (r == 1) {
-                        
-                        alert("datos Eliminados")
-                        return false;
-                        
-                    }
-                    
-                    }
-
-                })
-
-            })
 
         }
 
@@ -391,12 +408,12 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                         
                         $("#edit"+key).on("click", function(){
                             console.log(value)
-                            editartabla(value)
+                            cargarFormEdit(value)
                         })
 
                         $("#delete"+key).on("click", function(){
                             console.log(value)
-                            eliminartabla(value)
+                            cargarFormDelete(value)
                         })
                         
                         key = key + 1
@@ -410,9 +427,6 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             
         }
 
-       
-        
-        
         $("#orderBy").change(function(){
             cargarTabla();
         })
