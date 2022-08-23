@@ -30,7 +30,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--17: 31-->
 <!--implementada la funcion para dar de baja una fila-->
 <!--23: 26-->
-<!--modalAV ahor se oculta al dar de baja o alta-->
+<!--modalUD ahor se oculta al dar de baja o alta-->
 
 <!------Cambios a la interfaz------>
 <!--19: 53-->
@@ -39,7 +39,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!------Cambios a la estructura del codigo------>
 <!--15: 46-->
 <!--La funcionalidad de editar datos fue agregada en una funcion declarada como "loadFormedit()"" -->
-<!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
+<!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JUDaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
 <!--17: 31-->
 <!--La funcionalidad de eliminar datos fue agregada en una funcion declarada como "cargarFormDelete()" -->
 <!--23: 06-->
@@ -69,6 +69,17 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!------Mejoras al programa------>
 <!--16: 30-->
 <!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
+
+
+<!--19/8-->
+
+<!------Cambios a la estructura del codigo------>
+<!--17: 25-->
+<!--se corrigio la nomenclatura en los nombres e IDs los formularios-->
+
+<!------Cambios al programa------>
+<!--17: 02-->
+<!--se agrgo un modelo de validacion de datos (incompleto)-->
 
 <html lang="en">
 <head>
@@ -180,20 +191,20 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             </div>
             <div class="col-2">
                 <!-- The Modal -->
-                <div class="modal fade" id="modalAV">
+                <div class="modal fade" id="modalUD">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form id="formAV">
+                            <form id="formUD">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <div class="col-5">
                                         <h4 class="modal-title">Editar datos</h4>
                                     </div>
                                     <div class="col-2">
-                                        <label>id</label><input type="text" class="form-control" name="idAV" id="idAV" readonly>
+                                        <label>id</label><input type="text" class="form-control" name="idUD" id="idUD" readonly>
                                     </div>
                                     <div class="col-5 text-end">  
-                                        <button id="closeModalAV" type="button" onclick="" class="btn-close" data-bs-dismiss="modal"></button>
+                                        <button id="closeModalUD" type="button" onclick="" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                 </div>
                         
@@ -203,27 +214,27 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                <input name="nombreCompletoAV" min="0" max="255" type="text" id="nombreCompletoAV" placeholder=""  class="form-control">        
+                                                <input name="nombreCompletoUD" min="0" max="255" type="text" id="nombreCompletoUD" placeholder=""  class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dniAV" type="text" id="dniAV" min="0" max="11" placeholder="" class="form-control"> 
+                                                <input name="dniUD" type="text" id="dniUD" min="0" max="11" placeholder="" class="form-control"> 
                                             </div>       
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Email</label>
-                                                <input name="emailAV" type="text" min="0" max="255" id="emailAV" placeholder="" class="form-control">        
+                                                <input name="emailUD" type="text" min="0" max="255" id="emailUD" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contrasennaAV" type="text" min="0" max="255" id="contrasennaAV"  class="form-control">       
+                                                <input name="contrasennaUD" type="text" min="0" max="255" id="contrasennaUD"  class="form-control">       
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuarioAV" type="text" min="0" max="1" id="tipoUsuarioAV" placeholder="" class="form-control">        
+                                                <input name="tipoUsuarioUD" type="text" min="0" max="1" id="tipoUsuarioUD" placeholder="" class="form-control">        
                                             </div>    
                                         </div>
                                     </div>
@@ -231,7 +242,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             </form>  
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button id="closeModalAV2" type="button" class="btn btn-danger"  data-bs-dismiss="modal">Cancelar</button>
+                                <button id="closeModalUD2" type="button" class="btn btn-danger"  data-bs-dismiss="modal">Cancelar</button>
                                 <button id="editData" type="button" class="btn btn-primary xd" >enviar</button>
                                 <button id="deleteData" type="button" class="btn btn-danger xd" >eliminar</button>
                             </div>        
@@ -246,19 +257,18 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 <script>
 
-    
+ 
+
+
 $(document).ready(function()
 {
 
     $("#addData").click(function(){
     
-    var datos = $('#formAdd').serializeArray();tipoUsuario
-    console.log("datos:", datos)
-    console.log("nombreCompleto", nombreCompleto.value )
-    console.log("dni", dni.value)
-    console.log("email", email.value)
-    console.log("contrasenna", contrasenna.value) 
-    console.log("tipoUsuario", tipoUsuario.value)
+    var datos = $('#formAdd').serializeArray();
+    console.log(datos)
+    validarDatos(datos);
+    
     
         /*$.ajax({
             type:"POST",
@@ -279,9 +289,60 @@ $(document).ready(function()
         })*/
     })
 
+    function validarDatos(datos)
+    {
+        
+       if(datos[0].value.length == 0 || datos[0].value.length > 255)
+        {   
+            console.log("datos no validos",datos[0].value.length)
+            return false;
+        }
+        else
+        {
+            console.log("Nombre de usuario valido",datos[0].value, datos[0].value.length)
+            if(datos[1].value.length == 0 || datos[1].value.length > 11)
+            {
+                console.log("dni no valido",datos[1].value.length)
+                return false;
+            }
+            else
+            {
+                console.log("dni valido", datos[1].value.length)
+                if(datos[2].value.length == 0 || datos[2].value.length > 255)
+                {
+                    console.log("email no valido",datos[2].value.length)
+                    return false;
+                }
+                else
+                {
+                    console.log("email valido",datos[2].value.length)
+                    if(datos[3].value.length == 0 || datos[3].value.length > 255)
+                    {
+                        console.log("contraseña no valida",datos[3].value.length)
+                        return false;
+                    }
+                    else
+                    {
+                        console.log("contraseña valida",datos[3].value.length)
+                        if(datos[4].value.length == 0 || datos[4].value.length > 1)
+                        {
+                            console.log("contraseña no valida",datos[4].value.length)
+                            return false;
+                        }
+                        else
+                        {
+                            console.log("contraseña valida",datos[4].value.length)
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
     function confirmEdit()
     {
-    var editarDatos = $("#formAV").serializeArray();
+    var editarDatos = $("#formUD").serializeArray();
         //console.log("editarDatos: ", editarDatos)
         console.log("array: ", editarDatos)
         $.ajax({
@@ -294,9 +355,9 @@ $(document).ready(function()
                 {
 
                 alert("datos modificados con exito")
-                $("#ordenarNomb").val(nombreCompletoAV.value)
+                $("#ordenarNomb").val(nombreCompletoUD.value)
                 cargarTabla()
-                $("#modalAV").modal('hide')
+                $("#modalUD").modal('hide')
 
                 }
             }
@@ -306,7 +367,7 @@ $(document).ready(function()
 
     function confirmDelete()
     {
-        var eliminarDatos = $("#formAV").serializeArray();
+        var eliminarDatos = $("#formUD").serializeArray();
         //console.log("editarDatos: ", eliminarDatos)
         $.ajax({
         url: "DeleteUsuarios.php",
@@ -318,7 +379,7 @@ $(document).ready(function()
                 
                 alert("datos Eliminados")
                 cargarTabla()
-                $("#modalAV").modal('hide')
+                $("#modalUD").modal('hide')
                 
                 }
             }
@@ -327,8 +388,8 @@ $(document).ready(function()
 
     $("#editData").on("click", function(){confirmEdit()}) 
     $("#deleteData").on("click", function(){confirmDelete()}) 
-    //$("#closemodalAV2")
-    //$("#closemodalAV")
+    //$("#closemodalUD2")
+    //$("#closemodalUD")
 
     function cargarFormEdit(value)
     {
@@ -339,28 +400,28 @@ $(document).ready(function()
 
         console.log("xd",value)
         
-        $("#idAV").val(value.id_usuario)
-        $("#idAV").attr('placeholder', value.id_usuario) 
+        $("#idUD").val(value.id_usuario)
+        $("#idUD").attr('placeholder', value.id_usuario) 
         
-        $("#nombreCompletoAV").val(value.nombre_completo)
-        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombreCompletoAV").attr('readonly', false)
+        $("#nombreCompletoUD").val(value.nombre_completo)
+        $("#nombreCompletoUD").attr('placeholder', value.nombre_completo) 
+        $("#nombreCompletoUD").attr('readonly', false)
         
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', false)
+        $("#dniUD").val(value.dni)
+        $("#dniUD").attr('placeholder', value.dni) 
+        $("#dniUD").attr('readonly', false)
         
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', false)
+        $("#emailUD").val(value.email)
+        $("#emailUD").attr('placeholder', value.email) 
+        $("#emailUD").attr('readonly', false)
         
-        $("#contrasennaAV").val(value.contrasenna)
-        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-        $("#contrasennaAV").attr('readonly', false)
+        $("#contrasennaUD").val(value.contrasenna)
+        $("#contrasennaUD").attr('placeholder', value.contrasenna) 
+        $("#contrasennaUD").attr('readonly', false)
         
-        $("#tipoUsuarioAV").val(value.tipo_usuario)
-        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-        $("#tipoUsuarioAV").attr('readonly', false)
+        $("#tipoUsuarioUD").val(value.tipo_usuario)
+        $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario) 
+        $("#tipoUsuarioUD").attr('readonly', false)
 
     }
 
@@ -372,28 +433,28 @@ $(document).ready(function()
 
         console.log("value: ", value)
 
-        $("#idAV").val(value.id_usuario)
-        $("#idAV").attr('placeholder', value.id_usuario) 
+        $("#idUD").val(value.id_usuario)
+        $("#idUD").attr('placeholder', value.id_usuario) 
         
-        $("#nombreCompletoAV").val(value.nombre_completo)
-        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombreCompletoAV").attr('readonly', true)
+        $("#nombreCompletoUD").val(value.nombre_completo)
+        $("#nombreCompletoUD").attr('placeholder', value.nombre_completo) 
+        $("#nombreCompletoUD").attr('readonly', true)
         
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', true)
+        $("#dniUD").val(value.dni)
+        $("#dniUD").attr('placeholder', value.dni) 
+        $("#dniUD").attr('readonly', true)
         
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', true)
+        $("#emailUD").val(value.email)
+        $("#emailUD").attr('placeholder', value.email) 
+        $("#emailUD").attr('readonly', true)
         
-        $("#contrasennaAV").val(value.contrasenna)
-        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-        $("#contrasennaAV").attr('readonly', true)
+        $("#contrasennaUD").val(value.contrasenna)
+        $("#contrasennaUD").attr('placeholder', value.contrasenna) 
+        $("#contrasennaUD").attr('readonly', true)
         
-        $("#tipoUsuarioAV").val(value.tipo_usuario)
-        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-        $("#tipoUsuarioAV").attr('readonly', true)
+        $("#tipoUsuarioUD").val(value.tipo_usuario)
+        $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario) 
+        $("#tipoUsuarioUD").attr('readonly', true)
 
 
     }
@@ -427,8 +488,8 @@ $(document).ready(function()
                     "<td class='xd'>"+value.dni+"</td>"+
                     "<td class='xd'>"+value.contrasenna+"</td>"+
                     "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-secondary text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
