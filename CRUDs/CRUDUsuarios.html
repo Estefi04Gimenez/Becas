@@ -80,11 +80,13 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--se corrigio la nomenclatura en los parametros "name" y "id" los formularios-->
 
 
-<!--23/8-->
+<!--24/8-->
 
 <!------Cambios al programa------>
 <!--12: 02-->
 <!--Funcionalidad para validar datos impementada (incompleto)-->
+<!--18: 03-->
+<!--Funcionalidad para validar datos completada e impelmentada en la funcionalidad de alta y editar-->
 
 <!------Cambios a la interfaz------>
 <!--10: 53-->
@@ -311,6 +313,8 @@ $(document).ready(function()
     function validarDatos(datos)
     {
         var valido = true
+        console.log("array en validarDatos():", datos)
+
        if(datos[0].value.length == 0 || datos[0].value.length > 255)
         {   
             alert("Nombre no valido")
@@ -368,26 +372,33 @@ $(document).ready(function()
     function confirmEdit()
     {
     var editarDatos = $("#formUD").serializeArray();
-        //console.log("editarDatos: ", editarDatos)
-        console.log("array: ", editarDatos)
-        $.ajax({
-        url: "RenameUsuarios.php",
-        type: "POST",
-        data: editarDatos,
-        success: function(r)
+        //console.log("array: ", editarDatos)
+        var datos = [editarDatos[1], editarDatos[2], editarDatos[3], editarDatos[4], editarDatos[5]] 
+        
+        if(validarDatos(datos))
         {
-            if (r == 1) 
-                {
+            $.ajax({
+            url: "RenameUsuarios.php",
+            type: "POST",
+            data: editarDatos,
+            success: function(r)
+            {
+                if (r == 1) 
+                    {
 
-                alert("datos modificados con exito")
-                $("#ordenarNomb").val(nombreCompletoUD.value)
-                cargarTabla()
-                $("#modalUD").modal('hide')
+                    alert("datos modificados con exito")
+                    $("#ordenarNomb").val(nombreCompletoUD.value)
+                    cargarTabla()
+                    $("#modalUD").modal('hide')
 
+                    }
                 }
-            }
-        })
-
+            })
+        }
+        else
+        {
+            console.log("algo anda mal")
+        }
     }
 
     function confirmDelete()
@@ -423,7 +434,7 @@ $(document).ready(function()
         $("#editData").show()
         $("#deleteData").hide()
 
-        console.log("xd",value)
+        //console.log("xd",value)
         
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -456,7 +467,7 @@ $(document).ready(function()
         $("#editData").hide()
                     
 
-        console.log("value: ", value)
+        //console.log("value: ", value)
 
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -503,8 +514,8 @@ $(document).ready(function()
 
                 $.each(box, function(key, value){
                     //console.log("Respuesta: " + respuesta)
-                    console.log("Key: " , key)
-                    console.log("Value: " , value)
+                    //console.log("Key: " , key)
+                    //console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
                     "<td class='xd'>"+value.id_usuario+"</td>"+
@@ -518,12 +529,12 @@ $(document).ready(function()
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
-                        console.log(value)
+                        //console.log(value)
                         cargarFormEdit(value)
                     })
 
                     $("#delete"+key).on("click", function(){
-                        console.log(value)
+                        //console.log(value)
                         cargarFormDelete(value)
                     })
                     
@@ -546,8 +557,6 @@ $(document).ready(function()
         cargarTabla();
     })     
 })
-
-
 
 </script>
 <style>
