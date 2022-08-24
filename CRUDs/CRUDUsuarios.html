@@ -8,6 +8,9 @@
 <!--implementada la funcion para dar de alta una fila-->
 <!--implementada la funcion para editar una fila-->
 <!--implementada la funcion para leer la tabla por el campo "nombre_completo"-->
+<!-- Ahora la tabla se recarga al dar de alta  
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
+
 
 <!------Cambios a la interfaz------>
 <!-- cambios a las etiquetas th y td para que se puedan completar con los datos de la tabla usuarios  -->
@@ -18,11 +21,6 @@
 <!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada como "function cargarTabla()".
 Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
 
-<!------Mejoras al programa------>
-<!-- Ahora la tabla se recarga al dar de alta  
-    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
-
-
     
 <!--18/8-->
 
@@ -31,6 +29,12 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--implementada la funcion para dar de baja una fila-->
 <!--23: 26-->
 <!--modalUD ahor se oculta al dar de baja o alta-->
+<!--23: 06-->
+<!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
+    confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
+<!--23: 26-->
+<!-- Ahora la tabla se recarga al dar de baja o editar 
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
 
 <!------Cambios a la interfaz------>
 <!--19: 53-->
@@ -46,17 +50,12 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" agregadas a las funciones declaradas como "confirmEdit()" y "confirmDelete()"
     Esto permite solucionar error en el que las consultas de ajax se repetien el numero de veces que se hacia click en los botones de editar y/o borrar-->
 
-<!------Mejoras al programa------>
-<!--23: 06-->
-<!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
-    confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
-<!--23: 26-->
-<!-- Ahora la tabla se recarga al dar de baja o editar 
-    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
-
+    
 <!--19/8-->
 
 <!------Cambios al programa------>
+<!--16: 30-->
+<!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
 
 <!------Cambios a la interfaz------>
 <!--18: 50-->
@@ -66,20 +65,34 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--15: 21-->
 <!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
 
-<!------Mejoras al programa------>
-<!--16: 30-->
-<!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
 
-
-<!--19/8-->
-
-<!------Cambios a la estructura del codigo------>
-<!--17: 25-->
-<!--se corrigio la nomenclatura en los nombres e IDs los formularios-->
+<!--23/8-->
 
 <!------Cambios al programa------>
 <!--17: 02-->
-<!--se agrgo un modelo de validacion de datos (incompleto)-->
+<!--Funcionalidad para validar datos (incompleto)-->
+
+<!------Cambios a la interfaz------>
+<!--Sin cambios-->
+
+<!------Cambios a la estructura del codigo------>
+<!--17: 25-->
+<!--se corrigio la nomenclatura en los parametros "name" y "id" los formularios-->
+
+
+<!--24/8-->
+
+<!------Cambios al programa------>
+<!--12: 02-->
+<!--Funcionalidad para validar datos impementada (incompleto)-->
+<!--18: 03-->
+<!--Funcionalidad para validar datos completada e impelmentada en la funcionalidad de alta y editar-->
+
+<!------Cambios a la interfaz------>
+<!--10: 53-->
+<!--Se agrego el atributo "data-bs-backdrop='static'" a ambos modales. esto evita que se cierren al hacer click en otra parte de la pantalla que no se el modal -->
+<!--11: 04-->
+<!--Ahora se indica con un alert que deatos no son validos al intentar dar de alta-->
 
 <html lang="en">
 <head>
@@ -115,7 +128,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <button id="botonModal" type="button" class="btn text-center btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+</button>
             </div>
                  <!-- The Modal -->
-                <div class="modal fade" id="myModal">
+                <div class="modal fade" data-bs-backdrop="static" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                         
@@ -162,7 +175,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                             <!-- Modal footer -->
                         <div class="modal-footer">
                             <button id="closeModal2(1)" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button id="addData" type="button" class="btn btn-primary xd" data-bs-dismiss="modal">enviar</button>
+                            <button id="addData" type="button" class="btn btn-primary xd">enviar</button>
                         </div>        
                     </div>
                 </div>      
@@ -191,7 +204,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
             </div>
             <div class="col-2">
                 <!-- The Modal -->
-                <div class="modal fade" id="modalUD">
+                <div class="modal fade" data-bs-backdrop="static" id="modalUD">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form id="formUD">
@@ -267,10 +280,11 @@ $(document).ready(function()
     
     var datos = $('#formAdd').serializeArray();
     console.log(datos)
-    validarDatos(datos);
     
-    
-        /*$.ajax({
+
+    if (validarDatos(datos)) 
+    {
+        $.ajax({
             type:"POST",
             url:"addUsuarios.php",
             data: datos,
@@ -286,52 +300,67 @@ $(document).ready(function()
                     alert("Fallo");
                 }
             }
-        })*/
+        })
+    }
+    else
+    {
+        console.log("algo anda mal")
+    }
+
+       
     })
 
     function validarDatos(datos)
     {
-        
+        var valido = true
+        console.log("array en validarDatos():", datos)
+
        if(datos[0].value.length == 0 || datos[0].value.length > 255)
         {   
-            console.log("datos no validos",datos[0].value.length)
-            return false;
+            alert("Nombre no valido")
+            //console.log("Nombre completo no valido",datos[0].value.length)
+            valido = false
         }
         else
         {
-            console.log("Nombre de usuario valido",datos[0].value, datos[0].value.length)
-            if(datos[1].value.length == 0 || datos[1].value.length > 11)
-            {
-                console.log("dni no valido",datos[1].value.length)
-                return false;
+            //console.log("Nombre completo valido",datos[0].value, datos[0].value.length)
+            if(datos[1].value.length < 7 || datos[1].value.length > 11)
+            { 
+                alert("DNI no valido")
+                //console.log("dni no valido",datos[1].value.length)
+                valido = false
             }
             else
             {
-                console.log("dni valido", datos[1].value.length)
+                //console.log("dni valido", datos[1].value.length)
                 if(datos[2].value.length == 0 || datos[2].value.length > 255)
                 {
-                    console.log("email no valido",datos[2].value.length)
-                    return false;
+                    alert("Correo eletronico no valido")
+                    //console.log("email no valido",datos[2].value.length)
+                    valido = false
                 }
                 else
                 {
-                    console.log("email valido",datos[2].value.length)
+                    //console.log("email valido",datos[2].value.length)
                     if(datos[3].value.length == 0 || datos[3].value.length > 255)
                     {
-                        console.log("contraseña no valida",datos[3].value.length)
-                        return false;
+                        alert("Contraseña no valida")
+                        //console.log("contraseña no valida",datos[3].value.length)
+                        valido = false
                     }
                     else
                     {
-                        console.log("contraseña valida",datos[3].value.length)
-                        if(datos[4].value.length == 0 || datos[4].value.length > 1)
+                        //console.log("contraseña valida",datos[3].value.length)
+                        if(datos[4].value != "A" && datos[4].value != "U"  || datos[4].value.length == 0 || datos[4].value.length > 1)
                         {
-                            console.log("contraseña no valida",datos[4].value.length)
-                            return false;
+                            alert("Tipo de usuario no valido")
+                            //console.log("tipo de usuario no valido",datos[4].value.length)
+                            valido = false
                         }
                         else
                         {
-                            console.log("contraseña valida",datos[4].value.length)
+                            return true;
+                            //console.log("tipo de usuario valida",datos[4].value.length)
                         }
                     }
                 }
@@ -343,26 +372,33 @@ $(document).ready(function()
     function confirmEdit()
     {
     var editarDatos = $("#formUD").serializeArray();
-        //console.log("editarDatos: ", editarDatos)
-        console.log("array: ", editarDatos)
-        $.ajax({
-        url: "RenameUsuarios.php",
-        type: "POST",
-        data: editarDatos,
-        success: function(r)
+        //console.log("array: ", editarDatos)
+        var datos = [editarDatos[1], editarDatos[2], editarDatos[3], editarDatos[4], editarDatos[5]] 
+        
+        if(validarDatos(datos))
         {
-            if (r == 1) 
-                {
+            $.ajax({
+            url: "RenameUsuarios.php",
+            type: "POST",
+            data: editarDatos,
+            success: function(r)
+            {
+                if (r == 1) 
+                    {
 
-                alert("datos modificados con exito")
-                $("#ordenarNomb").val(nombreCompletoUD.value)
-                cargarTabla()
-                $("#modalUD").modal('hide')
+                    alert("datos modificados con exito")
+                    $("#ordenarNomb").val(nombreCompletoUD.value)
+                    cargarTabla()
+                    $("#modalUD").modal('hide')
 
+                    }
                 }
-            }
-        })
-
+            })
+        }
+        else
+        {
+            console.log("algo anda mal")
+        }
     }
 
     function confirmDelete()
@@ -398,7 +434,7 @@ $(document).ready(function()
         $("#editData").show()
         $("#deleteData").hide()
 
-        console.log("xd",value)
+        //console.log("xd",value)
         
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -431,7 +467,7 @@ $(document).ready(function()
         $("#editData").hide()
                     
 
-        console.log("value: ", value)
+        //console.log("value: ", value)
 
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -474,12 +510,12 @@ $(document).ready(function()
             success: function(respuesta){
                 
                 var box = JSON.parse(respuesta) 
-                console.log("xd:",box)
+                console.log("datos cargados:",box)
 
                 $.each(box, function(key, value){
                     //console.log("Respuesta: " + respuesta)
-                    console.log("Key: " , key)
-                    console.log("Value: " , value)
+                    //console.log("Key: " , key)
+                    //console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
                     "<td class='xd'>"+value.id_usuario+"</td>"+
@@ -493,12 +529,12 @@ $(document).ready(function()
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
-                        console.log(value)
+                        //console.log(value)
                         cargarFormEdit(value)
                     })
 
                     $("#delete"+key).on("click", function(){
-                        console.log(value)
+                        //console.log(value)
                         cargarFormDelete(value)
                     })
                     
@@ -521,8 +557,6 @@ $(document).ready(function()
         cargarTabla();
     })     
 })
-
-
 
 </script>
 <style>
