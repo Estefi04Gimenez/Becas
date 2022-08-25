@@ -1,12 +1,12 @@
 <?php
 require 'conexion.php';
 
-$id = $_POST['idAV'];
-$nomComp = $_POST['nombreCompletoAV'];
-$dni = $_POST['dniAV'];
-$email = $_POST['emailAV'];
-$contra = $_POST['contrasennaAV'];
-$tipo = $_POST['tipoUsuarioAV'];
+$id = $_POST['idUD'];
+$nomComp = $_POST['nombreCompletoUD'];
+$dni = $_POST['dniUD'];
+$email = $_POST['emailUD'];
+$contra = $_POST['contrasennaUD'];
+$tipo = $_POST['tipoUsuarioUD'];
 
 
 

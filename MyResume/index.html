@@ -76,511 +76,482 @@
         </div>
     </section>
     <!-- End Hero -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Consulta a base de datos</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
+            </div>
+            <div class="col-2">
+                <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
+                    <option class="form-control altura" value="0">Ordenar por...</option>
+                    <option class="form-control altura" value="1">DNI ↑</option>
+                    <option class="form-control altura" value="2">DNI ↓</option>
+                    <option class="form-control altura" value="3">Id ↑</option>
+                    <option class="form-control altura" value="4">Id ↓</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button id="botonModal" type="button" class="btn text-center btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+</button>
+            </div>
+            <!-- The Modal -->
+            <div class="modal fade" data-bs-backdrop="static" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-    <main id="main">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Añadir datos</h4>
+                            <button id="closeModal(1)" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
 
-        <!-- ======= About Section ======= -->
-        <!DOCTYPE html>
-        <!------CRUD de usuarios------>
-        <!--documentacion//changelog-->
+                        <!-- Modal body -->
+                        <div class="container">
+                            <form id="formAdd">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
+                                            <input name="nombreCompleto" type="text" id="nombreCompleto" min="0" max="255" placeholder="" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="texto de ejemplo" class="form-label">DNI</label>
+                                            <input name="dni" type="text" id="dni" min="0" max="11" placeholder="" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="texto de ejemplo" class="form-label">Email</label>
+                                            <input name="email" type="text" id="email" min="0" max="255" placeholder="" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="texto de ejemplo" class="form-label">Contraseña</label>
+                                            <input name="contraseña" type="text" id="contrasenna" min="0" max="255" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
+                                            <input name="tipoUsuario" type="text" id="tipoUsuario" min="0" max="1" placeholder="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
-        <!--16/8-->
-
-        <!------Cambios al programa------>
-        <!--implementada la funcion para dar de alta una fila-->
-        <!--implementada la funcion para editar una fila-->
-        <!--implementada la funcion para leer la tabla por el campo "nombre_completo"-->
-
-        <!------Cambios a la interfaz------>
-        <!-- cambios a las etiquetas th y td para que se puedan completar con los datos de la tabla usuarios  -->
-        <!-- cambios a las etiquetas label de "myModal", "MmdalEdit" y "MmdalDelete" para que sean iguales a los campos de la tabla usuarios  -->
-        <!-- cambios a los parametros id y name de los input de "myModal", "MmdalEdit" y "MmdalDelete" para implementar las funciones correspondientes a cada uno  -->
-
-        <!------Cambios a la estructura del codigo------>
-        <!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada como "function cargarTabla()".
-        Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
-
-        <!------Mejoras al programa------>
-        <!-- Ahora la tabla se recarga al dar de alta  
-            Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
-
-
-
-        <!--18/8-->
-
-        <!------Cambios al programa------>
-        <!--17: 31-->
-        <!--implementada la funcion para dar de baja una fila-->
-        <!--23: 26-->
-        <!--modalAV ahor se oculta al dar de baja o alta-->
-
-        <!------Cambios a la interfaz------>
-        <!--19: 53-->
-        <!-- La funcionalidad de dar de baja y editar datos ahora usan el mismo formulario en el mismo modal -->
-
-        <!------Cambios a la estructura del codigo------>
-        <!--15: 46-->
-        <!--La funcionalidad de editar datos fue agregada en una funcion declarada como "loadFormedit()"" -->
-        <!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
-        <!--17: 31-->
-        <!--La funcionalidad de eliminar datos fue agregada en una funcion declarada como "cargarFormDelete()" -->
-        <!--23: 06-->
-        <!--consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" agregadas a las funciones declaradas como "confirmEdit()" y "confirmDelete()"
-            Esto permite solucionar error en el que las consultas de ajax se repetien el numero de veces que se hacia click en los botones de editar y/o borrar-->
-
-        <!------Mejoras al programa------>
-        <!--23: 06-->
-        <!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
-            confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
-        <!--23: 26-->
-        <!-- Ahora la tabla se recarga al dar de baja o editar 
-            Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
-
-        <!--19/8-->
-
-        <!------Cambios al programa------>
-
-        <!------Cambios a la interfaz------>
-        <!--18: 50-->
-        <!-- ahora se puede cambiar la forma en la que se organiza la informacion de los registros al cargar la tabla -->
-
-        <!------Cambios a la estructura del codigo------>
-        <!--15: 21-->
-        <!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
-
-        <!------Mejoras al programa------>
-        <!--16: 30-->
-        <!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
-
-        <html lang="en">
-
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="../../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <title>Document</title>
-        </head>
-
-        <body>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h1>Consulta a base de datos</h1>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button id="closeModal2(1)" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button id="addData" type="button" class="btn btn-primary xd">enviar</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2">
-                        <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
-                    </div>
-                    <div class="col-2">
-                        <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
-                            <option class="form-control altura" value="0">Ordenar por...</option>
-                            <option class="form-control altura" value="1">DNI ↑</option>
-                            <option class="form-control altura" value="2">DNI ↓</option>
-                            <option class="form-control altura" value="3">Id ↑</option>
-                            <option class="form-control altura" value="4">Id ↓</option>
-                        </select>
-                    </div>
-                    <div class="col-2">
-                        <button id="botonModal" type="button" class="btn text-center btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+</button>
-                    </div>
-                    <!-- The Modal -->
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="xd">ID usuarios</th>
+                            <th class="xd">Nombre Completo</th>
+                            <th class="xd">DNI</th>
+                            <th class="xd">Email</th>
+                            <th class="xd">Contraseña</th>
+                            <th class="xd">Tipo de usuario</th>
+                            <!-- th class="xd">Datos Personales</th -->
+                            <th class="xd">Editar</th>
+                            <th class="xd">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla1">
 
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2">
+                <!-- The Modal -->
+                <div class="modal fade" data-bs-backdrop="static" id="modalUD">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form id="formUD">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Añadir datos</h4>
-                                    <button id="closeModal(1)" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <div class="col-5">
+                                        <h4 class="modal-title">Editar datos</h4>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>id</label><input type="text" class="form-control" name="idUD" id="idUD" readonly>
+                                    </div>
+                                    <div class="col-5 text-end">
+                                        <button id="closeModalUD" type="button" onclick="" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="container">
-                                    <form id="formAdd">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                    <input name="nombreCompleto" type="text" id="nombreCompleto" min="0" max="255" placeholder="" class="form-control">
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                    <input name="dni" type="text" id="dni" min="0" max="11" placeholder="" class="form-control">
-                                                </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
+                                                <input name="nombreCompletoUD" min="0" max="255" type="text" id="nombreCompletoUD" placeholder="" class="form-control">
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="texto de ejemplo" class="form-label">Email</label>
-                                                    <input name="email" type="text" id="email" min="0" max="255" placeholder="" class="form-control">
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                    <input name="contraseña" type="text" id="contraseña" min="0" max="255" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                    <input name="tipoUsuario" type="text" id="tipoUsuario" min="0" max="1" placeholder="" class="form-control">
-                                                </div>
+                                            <div class="col-6">
+                                                <label for="texto de ejemplo" class="form-label">DNI</label>
+                                                <input name="dniUD" type="text" id="dniUD" min="0" max="11" placeholder="" class="form-control">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button id="closeModal2(1)" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <button id="addData" type="button" class="btn btn-primary xd" data-bs-dismiss="modal">enviar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class='xd'>ID usuarios</th>
-                                    <th class='xd'>Nombre Completo</th>
-                                    <th class='xd'>DNI</th>
-                                    <th class='xd'>Email</th>
-                                    <th class='xd'>Contraseña</th>
-                                    <th class='xd'>Tipo de usuario</th>
-                                    <!-- th class='xd'>Datos Personales</th -->
-                                    <th class='xd'>Editar</th>
-                                    <th class='xd'>Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabla1">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-2">
-                        <!-- The Modal -->
-                        <div class="modal fade" id="modalAV">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form id="formAV">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <div class="col-5">
-                                                <h4 class="modal-title">Editar datos</h4>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="texto de ejemplo" class="form-label">Email</label>
+                                                <input name="emailUD" type="text" min="0" max="255" id="emailUD" placeholder="" class="form-control">
                                             </div>
-                                            <div class="col-2">
-                                                <label>id</label><input type="text" class="form-control" name="idAV" id="idAV" readonly>
-                                            </div>
-                                            <div class="col-5 text-end">
-                                                <button id="closeModalAV" type="button" onclick="" class="btn-close" data-bs-dismiss="modal"></button>
+                                            <div class="col-6">
+                                                <label for="texto de ejemplo" class="form-label">Contraseña</label>
+                                                <input name="contrasennaUD" type="text" min="0" max="255" id="contrasennaUD" class="form-control">
                                             </div>
                                         </div>
-
-                                        <!-- Modal body -->
-                                        <div class="container">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                        <input name="nombreCompletoAV" min="0" max="255" type="text" id="nombreCompletoAV" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                        <input name="dniAV" type="text" id="dniAV" min="0" max="11" placeholder="" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <label for="texto de ejemplo" class="form-label">Email</label>
-                                                        <input name="emailAV" type="text" min="0" max="255" id="emailAV" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                        <input name="contrasennaAV" type="text" min="0" max="255" id="contrasennaAV" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                        <input name="tipoUsuarioAV" type="text" min="0" max="1" id="tipoUsuarioAV" placeholder="" class="form-control">
-                                                    </div>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
+                                                <input name="tipoUsuarioUD" type="text" min="0" max="1" id="tipoUsuarioUD" placeholder="" class="form-control">
                                             </div>
                                         </div>
-                                    </form>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button id="closeModalAV2" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                        <button id="editData" type="button" class="btn btn-primary xd">enviar</button>
-                                        <button id="deleteData" type="button" class="btn btn-danger xd">eliminar</button>
                                     </div>
                                 </div>
+                            </form>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button id="closeModalUD2" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button id="editData" type="button" class="btn btn-primary xd">enviar</button>
+                                <button id="deleteData" type="button" class="btn btn-danger xd">eliminar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
+    </div>
+</body>
 
-        </html>
 
-        <script>
-            $(document).ready(function() {
 
-                $("#addData").click(function() {
+<script>
+    $(document).ready(function() {
 
-                    var datos = $('#formAdd').serializeArray();
-                    //console.log("datos:",datos)
-                    $.ajax({
-                        type: "POST",
-                        url: "addUsuarios.php",
-                        data: datos,
-                        success: function(r) {
-                            if (r == 1) {
-                                alert("agregado con exito");
-                                $("#ordenarNomb").val(nombreCompleto.value)
-                                cargarTabla();
-                                $("#myModal").modal('hide')
+        $("#addData").click(function() {
+
+            var datos = $('#formAdd').serializeArray();
+            console.log(datos)
+
+
+            if (validarDatos(datos)) {
+                $.ajax({
+                    type: "POST",
+                    url: "addUsuarios.php",
+                    data: datos,
+                    success: function(r) {
+                        if (r == 1) {
+                            alert("agregado con exito");
+                            $("#ordenarNomb").val(nombreCompleto.value)
+                            cargarTabla();
+                            $("#myModal").modal('hide')
+                        } else {
+                            alert("Fallo");
+                        }
+                    }
+                })
+            } else {
+                console.log("algo anda mal")
+            }
+
+
+        })
+
+        function validarDatos(datos) {
+            var valido = true
+            console.log("array en validarDatos():", datos)
+
+            if (datos[0].value.length == 0 || datos[0].value.length > 255) {
+                alert("Nombre no valido")
+                    //console.log("Nombre completo no valido",datos[0].value.length)
+                valido = false
+            } else {
+                //console.log("Nombre completo valido",datos[0].value, datos[0].value.length)
+                if (datos[1].value.length < 7 || datos[1].value.length > 11) {
+                    alert("DNI no valido")
+                        //console.log("dni no valido",datos[1].value.length)
+                    valido = false
+                } else {
+                    //console.log("dni valido", datos[1].value.length)
+                    if (datos[2].value.length == 0 || datos[2].value.length > 255) {
+                        alert("Correo eletronico no valido")
+                            //console.log("email no valido",datos[2].value.length)
+                        valido = false
+                    } else {
+                        //console.log("email valido",datos[2].value.length)
+                        if (datos[3].value.length == 0 || datos[3].value.length > 255) {
+                            alert("Contraseña no valida")
+                                //console.log("contraseña no valida",datos[3].value.length)
+                            valido = false
+                        } else {
+                            //console.log("contraseña valida",datos[3].value.length)
+                            if (datos[4].value != "A" && datos[4].value != "U" || datos[4].value.length == 0 || datos[4].value.length > 1) {
+                                alert("Tipo de usuario no valido")
+                                    //console.log("tipo de usuario no valido",datos[4].value.length)
+                                valido = false
                             } else {
-                                alert("Fallo");
+                                return true;
+                                //console.log("tipo de usuario valida",datos[4].value.length)
                             }
                         }
-                    })
+                    }
+                }
+            }
+
+        }
+
+        function confirmEdit() {
+            var editarDatos = $("#formUD").serializeArray();
+            //console.log("array: ", editarDatos)
+            var datos = [editarDatos[1], editarDatos[2], editarDatos[3], editarDatos[4], editarDatos[5]]
+
+            if (validarDatos(datos)) {
+                $.ajax({
+                    url: "RenameUsuarios.php",
+                    type: "POST",
+                    data: editarDatos,
+                    success: function(r) {
+                        if (r == 1) {
+
+                            alert("datos modificados con exito")
+                            $("#ordenarNomb").val(nombreCompletoUD.value)
+                            cargarTabla()
+                            $("#modalUD").modal('hide')
+
+                        }
+                    }
                 })
+            } else {
+                console.log("algo anda mal")
+            }
+        }
 
-                function confirmEdit() {
-                    var editarDatos = $("#formAV").serializeArray();
-                    //console.log("editarDatos: ", editarDatos)
-                    $.ajax({
-                        url: "RenameUsuarios.php",
-                        type: "POST",
-                        data: editarDatos,
-                        success: function(r) {
-                            if (r == 1) {
+        function confirmDelete() {
+            var eliminarDatos = $("#formUD").serializeArray();
+            //console.log("editarDatos: ", eliminarDatos)
+            $.ajax({
+                url: "DeleteUsuarios.php",
+                type: "POST",
+                data: eliminarDatos,
+                success: function(r) {
+                    if (r == 1) {
 
-                                alert("datos modificados con exito")
-                                $("#ordenarNomb").val(nombreCompletoAV.value)
-                                cargarTabla()
-                                $("#modalAV").modal('hide')
+                        alert("datos Eliminados")
+                        cargarTabla()
+                        $("#modalUD").modal('hide')
 
-                            }
-                        }
-                    })
-
+                    }
                 }
+            })
+        }
 
-                function confirmDelete() {
-                    var eliminarDatos = $("#formAV").serializeArray();
-                    //console.log("editarDatos: ", eliminarDatos)
-                    $.ajax({
-                        url: "DeleteUsuarios.php",
-                        type: "POST",
-                        data: eliminarDatos,
-                        success: function(r) {
-                            if (r == 1) {
+        $("#editData").on("click", function() {
+            confirmEdit()
+        })
+        $("#deleteData").on("click", function() {
+                confirmDelete()
+            })
+            //$("#closemodalUD2")
+            //$("#closemodalUD")
 
-                                alert("datos Eliminados")
-                                cargarTabla()
-                                $("#modalAV").modal('hide')
+        function cargarFormEdit(value) {
 
-                            }
-                        }
-                    })
-                }
+            //$("#ordenarNomb").val('')
+            $("#editData").show()
+            $("#deleteData").hide()
 
-                $("#editData").on("click", function() {
-                    confirmEdit()
-                })
-                $("#deleteData").on("click", function() {
-                        confirmDelete()
-                    })
-                    //$("#closemodalAV2")
-                    //$("#closemodalAV")
+            //console.log("xd",value)
 
-                function cargarFormEdit(value) {
+            $("#idUD").val(value.id_usuario)
+            $("#idUD").attr('placeholder', value.id_usuario)
 
-                    //$("#ordenarNomb").val('')
-                    $("#editData").show()
-                    $("#deleteData").hide()
+            $("#nombreCompletoUD").val(value.nombre_completo)
+            $("#nombreCompletoUD").attr('placeholder', value.nombre_completo)
+            $("#nombreCompletoUD").attr('readonly', false)
 
-                    console.log("xd", value)
+            $("#dniUD").val(value.dni)
+            $("#dniUD").attr('placeholder', value.dni)
+            $("#dniUD").attr('readonly', false)
 
-                    $("#idAV").val(value.id_usuario)
-                    $("#idAV").attr('placeholder', value.id_usuario)
+            $("#emailUD").val(value.email)
+            $("#emailUD").attr('placeholder', value.email)
+            $("#emailUD").attr('readonly', false)
 
-                    $("#nombreCompletoAV").val(value.nombre_completo)
-                    $("#nombreCompletoAV").attr('placeholder', value.nombre_completo)
-                    $("#nombreCompletoAV").attr('readonly', false)
+            $("#contrasennaUD").val(value.contrasenna)
+            $("#contrasennaUD").attr('placeholder', value.contrasenna)
+            $("#contrasennaUD").attr('readonly', false)
 
-                    $("#dniAV").val(value.dni)
-                    $("#dniAV").attr('placeholder', value.dni)
-                    $("#dniAV").attr('readonly', false)
+            $("#tipoUsuarioUD").val(value.tipo_usuario)
+            $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario)
+            $("#tipoUsuarioUD").attr('readonly', false)
 
-                    $("#emailAV").val(value.email)
-                    $("#emailAV").attr('placeholder', value.email)
-                    $("#emailAV").attr('readonly', false)
+        }
 
-                    $("#contrasennaAV").val(value.contrasenna)
-                    $("#contrasennaAV").attr('placeholder', value.contrasenna)
-                    $("#contrasennaAV").attr('readonly', false)
-
-                    $("#tipoUsuarioAV").val(value.tipo_usuario)
-                    $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario)
-                    $("#tipoUsuarioAV").attr('readonly', false)
-
-                }
-
-                function cargarFormDelete(value) {
-                    $("#deleteData").show()
-                    $("#editData").hide()
+        function cargarFormDelete(value) {
+            $("#deleteData").show()
+            $("#editData").hide()
 
 
-                    console.log("value: ", value)
+            //console.log("value: ", value)
 
-                    $("#idAV").val(value.id_usuario)
-                    $("#idAV").attr('placeholder', value.id_usuario)
+            $("#idUD").val(value.id_usuario)
+            $("#idUD").attr('placeholder', value.id_usuario)
 
-                    $("#nombreCompletoAV").val(value.nombre_completo)
-                    $("#nombreCompletoAV").attr('placeholder', value.nombre_completo)
-                    $("#nombreCompletoAV").attr('readonly', true)
+            $("#nombreCompletoUD").val(value.nombre_completo)
+            $("#nombreCompletoUD").attr('placeholder', value.nombre_completo)
+            $("#nombreCompletoUD").attr('readonly', true)
 
-                    $("#dniAV").val(value.dni)
-                    $("#dniAV").attr('placeholder', value.dni)
-                    $("#dniAV").attr('readonly', true)
+            $("#dniUD").val(value.dni)
+            $("#dniUD").attr('placeholder', value.dni)
+            $("#dniUD").attr('readonly', true)
 
-                    $("#emailAV").val(value.email)
-                    $("#emailAV").attr('placeholder', value.email)
-                    $("#emailAV").attr('readonly', true)
+            $("#emailUD").val(value.email)
+            $("#emailUD").attr('placeholder', value.email)
+            $("#emailUD").attr('readonly', true)
 
-                    $("#contrasennaAV").val(value.contrasenna)
-                    $("#contrasennaAV").attr('placeholder', value.contrasenna)
-                    $("#contrasennaAV").attr('readonly', true)
+            $("#contrasennaUD").val(value.contrasenna)
+            $("#contrasennaUD").attr('placeholder', value.contrasenna)
+            $("#contrasennaUD").attr('readonly', true)
 
-                    $("#tipoUsuarioAV").val(value.tipo_usuario)
-                    $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario)
-                    $("#tipoUsuarioAV").attr('readonly', true)
+            $("#tipoUsuarioUD").val(value.tipo_usuario)
+            $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario)
+            $("#tipoUsuarioUD").attr('readonly', true)
 
 
-                }
+        }
 
-                function cargarTabla() {
-                    $("#tabla1").empty()
-                    var opt = $("#orderBy").val()
-                    var l = $("#ordenarNomb").val()
-                    if (l != "") {
-                        //console.log("if")
-                        $.ajax({
-                            url: "BackendUsuarios.php", //action
-                            type: "POST", //method
-                            data: {
-                                "letra": l,
-                                "opcion": opt
-                            },
-                            //dataType: "json",
-                            success: function(respuesta) {
+        function cargarTabla() {
+            $("#tabla1").empty()
+            var opt = $("#orderBy").val()
+            var l = $("#ordenarNomb").val()
+            if (l != "") {
+                //console.log("if")
+                $.ajax({
+                    url: "BackendUsuarios.php", //action
+                    type: "POST", //method
+                    data: {
+                        "letra": l,
+                        "opcion": opt
+                    },
+                    //dataType: "json",
+                    success: function(respuesta) {
 
-                                var box = JSON.parse(respuesta)
-                                console.log("xd:", box)
+                        var box = JSON.parse(respuesta)
+                        console.log("datos cargados:", box)
 
-                                $.each(box, function(key, value) {
-                                    //console.log("Respuesta: " + respuesta)
-                                    console.log("Key: ", key)
-                                    console.log("Value: ", value)
+                        $.each(box, function(key, value) {
+                            //console.log("Respuesta: " + respuesta)
+                            //console.log("Key: " , key)
+                            //console.log("Value: " , value)
 
-                                    $("#tabla1").append("<tr id='fila" + key + "'  >" +
-                                        "<td class='xd'>" + value.id_usuario + "</td>" +
-                                        "<td class='xd'>" + value.nombre_completo + "</td>" +
-                                        "<td class='xd'>" + value.email + "</td>" +
-                                        "<td class='xd'>" + value.dni + "</td>" +
-                                        "<td class='xd'>" + value.contrasenna + "</td>" +
-                                        "<td class='xd'>" + value.tipo_usuario + "</td>" +
-                                        "<td class='xd'>" + "<button class='btn btn-sm btn-success text-center'  id='edit" + key + "' data-bs-toggle='modal' data-bs-target='#modalAV' >" + "<img class='iconsize xd' src='edit.png'>" + "</button>" + "</td>" +
-                                        "<td class='xd'>" + "<button class='btn btn-sm btn-secondary text-center'  id='delete" + key + "' data-bs-toggle='modal' data-bs-target='#modalAV' >" + "<img class='iconsize xd' src='delete.png'>" + "</td>" +
-                                        "</tr>")
+                            $("#tabla1").append("<tr id='fila" + key + "'  >" +
+                                "<td class='xd'>" + value.id_usuario + "</td>" +
+                                "<td class='xd'>" + value.nombre_completo + "</td>" +
+                                "<td class='xd'>" + value.email + "</td>" +
+                                "<td class='xd'>" + value.dni + "</td>" +
+                                "<td class='xd'>" + value.contrasenna + "</td>" +
+                                "<td class='xd'>" + value.tipo_usuario + "</td>" +
+                                "<td class='xd'>" + "<button class='btn btn-sm btn-secondary text-center'  id='edit" + key + "' data-bs-toggle='modal' data-bs-target='#modalUD' >" + "<img class='iconsize xd' src='edit.png'>" + "</button>" + "</td>" +
+                                "<td class='xd'>" + "<button class='btn btn-sm btn-danger text-center'  id='delete" + key + "' data-bs-toggle='modal' data-bs-target='#modalUD' >" + "<img class='iconsize xd' src='delete.png'>" + "</td>" +
+                                "</tr>")
 
-                                    $("#edit" + key).on("click", function() {
-                                        console.log(value)
-                                        cargarFormEdit(value)
-                                    })
+                            $("#edit" + key).on("click", function() {
+                                //console.log(value)
+                                cargarFormEdit(value)
+                            })
 
-                                    $("#delete" + key).on("click", function() {
-                                        console.log(value)
-                                        cargarFormDelete(value)
-                                    })
+                            $("#delete" + key).on("click", function() {
+                                //console.log(value)
+                                cargarFormDelete(value)
+                            })
 
-                                    key = key + 1
-
-                                })
-
-                            }
+                            key = key + 1
 
                         })
+
                     }
 
-                }
-
-                $("#orderBy").change(function() {
-                    cargarTabla();
                 })
-
-                $("#ordenarNomb").keyup(function() {
-                    cargarTabla();
-                })
-            })
-        </script>
-        <style>
-            .xd {
-                text-align: center;
             }
-            
-            .iconsize {
-                height: 30px;
-                width: 30px;
-            }
-            
-            .altura {
-                height: 40px;
-            }
-        </style>
-        <!-- End #main -->
 
-        <!-- ======= Footer ======= -->
-        <footer id="footer">
-            <div class="container">
-                <h3>Brandon Johnson</h3>
-                <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-                <div class="social-links">
-                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                </div>
-            </div>
-        </footer>
-        <!-- End Footer -->
+        }
 
-        <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        $("#orderBy").change(function() {
+            cargarTabla();
+        })
 
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-        <script src="assets/vendor/aos/aos.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="assets/vendor/typed.js/typed.min.js"></script>
-        <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
+        $("#ordenarNomb").keyup(function() {
+            cargarTabla();
+        })
+    })
+</script>
+<style>
+    .xd {
+        text-align: center;
+    }
+    
+    .iconsize {
+        height: 30px;
+        width: 30px;
+    }
+    
+    .altura {
+        height: 40px;
+    }
+</style>
 
-        <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
+
+
+
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="container">
+        <h3>Brandon Johnson</h3>
+        <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+        <div class="social-links">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+<!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/typed.js/typed.min.js"></script>
+<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
 
 </body>
 
