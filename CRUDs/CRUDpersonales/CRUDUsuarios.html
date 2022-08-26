@@ -22,93 +22,6 @@
 Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
 
     
-<!--18/8-->
-
-<!------Cambios al programa------>
-<!--17: 31-->
-<!--implementada la funcion para dar de baja una fila-->
-<!--23: 26-->
-<!--modalUD ahor se oculta al dar de baja o alta-->
-<!--23: 06-->
-<!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
-    confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
-<!--23: 26-->
-<!-- Ahora la tabla se recarga al dar de baja o editar 
-    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
-
-<!------Cambios a la interfaz------>
-<!--19: 53-->
-<!-- La funcionalidad de dar de baja y editar datos ahora usan el mismo formulario en el mismo modal -->
-
-<!------Cambios a la estructura del codigo------>
-<!--15: 46-->
-<!--La funcionalidad de editar datos fue agregada en una funcion declarada como "loadFormedit()"" -->
-<!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JUDaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
-<!--17: 31-->
-<!--La funcionalidad de eliminar datos fue agregada en una funcion declarada como "cargarFormDelete()" -->
-<!--23: 06-->
-<!--consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" agregadas a las funciones declaradas como "confirmEdit()" y "confirmDelete()"
-    Esto permite solucionar error en el que las consultas de ajax se repetien el numero de veces que se hacia click en los botones de editar y/o borrar-->
-
-    
-<!--19/8-->
-
-<!------Cambios al programa------>
-<!--16: 30-->
-<!-- Ahora al dar de alta o editar se muestra el registro en la tabla-->
-
-<!------Cambios a la interfaz------>
-<!--18: 50-->
-<!-- ahora se puede cambiar la forma en la que se organiza la informacion de los registros al cargar la tabla -->
-
-<!------Cambios a la estructura del codigo------>
-<!--15: 21-->
-<!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
-
-
-<!--23/8-->
-
-<!------Cambios al programa------>
-<!--17: 02-->
-<!--Funcionalidad para validar datos (incompleto)-->
-
-<!------Cambios a la interfaz------>
-<!--Sin cambios-->
-
-<!------Cambios a la estructura del codigo------>
-<!--17: 25-->
-<!--se corrigio la nomenclatura en los parametros "name" y "id" los formularios-->
-
-
-<!--24/8-->
-
-<!------Cambios al programa------>
-<!--12: 02-->
-<!--Funcionalidad para validar datos impementada (incompleto)-->
-<!--18: 03-->
-<!--Funcionalidad para validar datos completada e impelmentada en la funcionalidad de alta y editar-->
-
-<!------Cambios a la interfaz------>
-<!--10: 53-->
-<!--Se agrego el atributo "data-bs-backdrop='static'" a ambos modales. esto evita que se cierren al hacer click en otra parte de la pantalla que no se el modal -->
-<!--11: 04-->
-<!--Ahora se indica con un alert que deatos no son validos al intentar dar de alta-->
-<!--22: 14-->
-<!--ahora el input de los dni es d numerico. esto solucina error que te permitia ingrsar letras en el dni-->
-
-
-<!--25/8-->
-
-<!------Cambios a la interfaz------>
-<!--22: 04-->
-<!--se agregaron mas clases de bootstrap a las tablas-->
-
-
-<!--26/8-->
-
-<!------Cambios al programa------>
-<!--09: 06-->
-<!--se agregaro una funcionalidad para filtrar la tabla por tipo de usuario-->
 
 <html lang="en">
 <head>
@@ -121,7 +34,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                   <h1>Consulta a base de datos</h1>      
@@ -140,13 +53,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                     <option class="form-control altura" value="4">Id ↓</option>
                 </select>
             </div>
-            <div class="col-2">
-                <select class="form-control altura" id="readByTipo" value="0" placeholder="ordenar por">
-                    <option class="form-control altura" value="0">Tipo de usuario</option>
-                    <option class="form-control altura" value="1">Administrador</option>
-                    <option class="form-control altura" value="2">Usuario</option>
-                </select>
-            </div>
+            
             <div class="col-2">
                 <button id="botonModal" type="button" class="btn text-center btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+</button>
             </div>
@@ -209,15 +116,18 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <table class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                         <tr>
-                            <th class='xd'>ID usuarios</th>
-                            <th class='xd'>Nombre Completo</th>
-                            <th class='xd'>Email</th>
-                            <th class='xd'>DNI</th>
-                            <th class='xd'>Contraseña</th>
-                            <th class='xd'>Tipo de usuario</th>
-                            <!-- th class='xd'>Datos Personales</th -->
-                            <th class='xd'>Editar</th>
-                            <th class='xd'>Eliminar</th>
+                            <th class='xd'>ID personal</th>
+                            <th class='xd'>ID usuario</th>
+                            <th class='xd'>Genero</th>
+                            <th class='xd'>Fecha de nacimiento</th>
+                            <th class='xd'>Nro de telefono</th>
+                            <th class='xd'>cuil</th>
+                            <th class='xd'>foto de DNI</th>
+                            <th class='xd'>Expediente de anses</th>
+                            <th class='xd'>Certificado de nacimiento</th>
+                            <th class='xd'>Domicilio</th>
+                            <th class='xd'>Estado academico</th><!--si ya está estudiando o recien termina la secundaria-->
+                            <th class='xd'>Fecha Alta/Modificacion</th>
                         </tr>
                     </thead>
                     <tbody  id="tabla1">
@@ -521,14 +431,13 @@ $(document).ready(function()
     {   
         $("#tabla1").empty()
         var opt = $("#orderBy").val()
-        var read = $("#readByTipo").val()
         var l = $("#ordenarNomb").val()
         if (l != ""){
             //console.log("if")
             $.ajax({
             url: "BackendUsuarios.php", //action
             type: "POST", //method
-            data: {"letra": l, "opcion": opt, "filtro": read},
+            data: {"letra": l, "opcion": opt},
             //dataType: "json",
             success: function(respuesta){
                 
@@ -578,11 +487,7 @@ $(document).ready(function()
 
     $("#ordenarNomb").keyup(function(){
         cargarTabla();
-    })
-
-    $("#readByTipo").change(function(){
-        cargarTabla();
-    })
+    })     
 })
 
 </script>

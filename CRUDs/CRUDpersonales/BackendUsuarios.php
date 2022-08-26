@@ -2,19 +2,10 @@
 require 'conexion.php';
 $letra = $_POST['letra'];
 $opcion = $_POST['opcion'];
-$filtro = $_POST['filtro'];
 
 $q = "SELECT * FROM usuarios WHERE UPPER(nombre_completo) LIKE '%" . strtoupper($letra) . "%'";
 //$q = "select * from alumnos3";
 
-if($filtro == 1)
-{
-  $q = $q."AND tipo_usuario = 'A'";
-}
-if($filtro == 2)
-{
-  $q = $q."AND tipo_usuario = 'U'";
-}
 
 
 if($opcion == 1)
@@ -33,7 +24,6 @@ if($opcion == 4)
 {
   $q = $q."ORDER BY id_usuario DESC";
 }
-
 
 $r = mysqli_query($con, $q);
 //se arma un array asociativo(nombre campo , valor) que despues se
