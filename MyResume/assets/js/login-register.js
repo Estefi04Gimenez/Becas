@@ -1,11 +1,18 @@
-
+/*
+ *
+ * login-register modal
+ * Autor: Creative Tim
+ * Web-autor: creative.tim
+ * Web script: http://creative-tim.com
+ * 
+ */
 function showRegisterForm(){
     $('.loginBox').fadeOut('fast',function(){
         $('.registerBox').fadeIn('fast');
         $('.login-footer').fadeOut('fast',function(){
             $('.register-footer').fadeIn('fast');
         });
-        $('.modal-title').html('Registrar');
+        $('.modal-title').html('Register with');
     }); 
     $('.error').removeClass('alert alert-danger').html('');
        
@@ -17,7 +24,7 @@ function showLoginForm(){
             $('.login-footer').fadeIn('fast');    
         });
         
-        $('.modal-title').html('LOGIN');
+        $('.modal-title').html('Login with');
     });       
      $('.error').removeClass('alert alert-danger').html(''); 
 }
@@ -54,7 +61,7 @@ function loginAjax(){
 
 function shakeModal(){
     $('#loginModal .modal-dialog').addClass('shake');
-             $('.error').addClass('alert alert-danger').html("DNI/email o password Invalido");
+             $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
              $('input[type="password"]').val('');
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 
