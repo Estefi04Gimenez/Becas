@@ -18,7 +18,7 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a>
-                <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register</a></div>
+                <!--<a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register</a></div>-->
             <div class="col-sm-4"></div>
         </div>
 
@@ -35,30 +35,31 @@
                             <div class="content">
                                 <div class="error"></div>
                                 <div class="form loginBox">
-                                    <form method="POST" action="" accept-charset="UTF-8">
+                                    <form method="POST" action="login.php" >
                                     <input id="dni" class="form-control" type="text" placeholder="DNI" name="dni">
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="passw">
-                                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                                    <input id="contrasena" class="form-control" type="password" placeholder="Password" name="contrasena">
+                                    <button class="btn btn-default btn-login">LOGIN</button>
+                                    <!--<input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">-->
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="box">
+                        <!--<div class="box">
                             <div class="content registerBox" style="display:none;">
                             <div class="form">
                                 <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
                                 <input id="dni-reg" class="form-control" type="text" placeholder="DNI" name="dni-reg">
                                 <input id="email-reg" class="form-control" type="text" placeholder="Email" name="email-reg">
-                                <input id="passw-reg" class="form-control" type="password" placeholder="Password" name="passw-reg">
-                                <input id="passw-reg_confirmation" class="form-control" type="password" placeholder="Repetir Password" name="passw-reg_confirmation">
+                                <input id="contra-reg" class="form-control" type="password" placeholder="Password" name="contra-reg">
+                                <input id="contra-reg_confirmation" class="form-control" type="password" placeholder="Repetir Password" name="contra-reg_confirmation">
                                 <input class="btn btn-default btn-register" type="button" value="Crear Cuenta" name="commit">
                                 </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
-                    <div class="modal-footer">
+                    <!--<div class="modal-footer">
                         <div class="forgot login-footer">
                             <span>No estas registrado
                                 <a href="javascript: showRegisterForm();">Registrarse</a>
@@ -68,7 +69,7 @@
                             <span>Ya estas registrado?</span>
                             <a href="javascript: showLoginForm();">Login</a>
                         </div>
-                    </div>
+                    </div>-->
     		    </div>
 		    </div>
 		</div>
