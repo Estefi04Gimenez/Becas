@@ -18,7 +18,7 @@
     }
     else
     {
-        header("location: ##.html");
+        header("location: #.html");
         
     }
 
