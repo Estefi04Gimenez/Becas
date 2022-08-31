@@ -110,6 +110,23 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 <!--09: 06-->
 <!--se agregaro una funcionalidad para filtrar la tabla por tipo de usuario-->
 
+
+<!--27/8-->
+
+<!------Cambios al programa------>
+<!--21: 45-->
+<!--ahora todas las consultas de ajax a 'BackendUsuarios.php' se envian con el dato "funcion" para definir mediante un 'if()' que funcion/es SQL se desea ejecutar-->
+<!--22: 23-->
+<!--ahora al dar de alta se envia en un array el dni y el email para hacer una consulta a la base de datos, en la que los registros consultados coincidan con los datos enviados. 
+    si ambos datos tiene un registro que coincida se reciben en formato JSON y se convierte en array [0{dni: "registro que coincide"},1{email: "registro que coincide"}].
+    si solamente uno de los registros coincide entonces el valor de de 'email' o 'dni' será 0 en vez de "registro que coincide"-->
+
+<!--31/8-->
+
+<!--20:25-->
+<!--las funciones 'confirmADdd()', 'validarDatos()' y 'validarRepetidos()' ahora son asincronas para guardar su resultado (true o false) en una variable.
+    esto evita que al llamarlas con un if este las tome como false antes de que la funcion termine -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -301,11 +318,14 @@ $(document).ready(function()
     
     
 
-    $("#addData").click(function(){
-    var datos = $('#formAdd').serializeArray();
-    console.log(datos)
-    if (validarDatos(datos)) 
+    async function confirmAdd()
     {
+    var datos = $('#formAdd').serializeArray();
+    
+    var validcion = await validarDatos(datos) 
+    if (validcion == true) 
+    {
+        console.log("validacion exitosa")
         $.ajax({
             type:"POST",
             url:"addUsuarios.php",
@@ -327,21 +347,20 @@ $(document).ready(function()
     else
     {
         console.log("algo anda mal")
+    }  
     }
+    $("#addData").on("click", function(){confirmAdd() }) 
 
-       
-    })
-
-    function validarDatos(datos)
+    async function validarDatos(datos)
     {
         var valido = true
-        console.log("array en validarDatos():", datos)
-
-       if(datos[0].value.length == 0 || datos[0].value.length > 255)
+    
+    if(datos[0].value.length == 0 || datos[0].value.length > 255)
         {   
             alert("Nombre no valido")
             //console.log("Nombre completo no valido",datos[0].value.length)
             valido = false
+            return valido;
         }
         else
         {
@@ -351,6 +370,7 @@ $(document).ready(function()
                 alert("DNI no valido")
                 //console.log("dni no valido",datos[1].value.length)
                 valido = false
+                return valido;
             }
             else
             {
@@ -360,6 +380,7 @@ $(document).ready(function()
                     alert("Correo eletronico no valido")
                     //console.log("email no valido",datos[2].value.length)
                     valido = false
+                    return valido;
                 }
                 else
                 {
@@ -369,6 +390,7 @@ $(document).ready(function()
                         alert("Contraseña no valida")
                         //console.log("contraseña no valida",datos[3].value.length)
                         valido = false
+                        return valido;
                     }
                     else
                     {
@@ -378,28 +400,39 @@ $(document).ready(function()
                             alert("Tipo de usuario no valido")
                             //console.log("tipo de usuario no valido",datos[4].value.length)
                             valido = false
+                            return valido;
                         }
                         else
                         {
-                            return true;
-                            //console.log("tipo de usuario valida",datos[4].value.length)
+                            x = await validarRepetidos(datos)
+                            console.log("Await:", x)
+                            if(x == false)
+                            {
+                                alert("dni o email ya registrado")
+                                valido = false
+                                return valido;
+                                
+                            }
+                            else
+                            {
+                                return valido;
+                                //console.log("tipo de usuario valida",datos[4].value.length)
+                            }
                         }
                     }
                 }
             }
-        }
-        
+        } 
     }
 
     function confirmEdit()
     {
     var editarDatos = $("#formUD").serializeArray();
-        //console.log("array: ", editarDatos)
         var datos = [editarDatos[1], editarDatos[2], editarDatos[3], editarDatos[4], editarDatos[5]] 
         
         if(validarDatos(datos))
         {
-            $.ajax({
+            /*$.ajax({
             url: "RenameUsuarios.php",
             type: "POST",
             data: editarDatos,
@@ -415,7 +448,7 @@ $(document).ready(function()
 
                     }
                 }
-            })
+            })*/
         }
         else
         {
@@ -444,19 +477,13 @@ $(document).ready(function()
         })
     }
 
-    $("#editData").on("click", function(){confirmEdit()}) 
+    $("#editData").on("click", function(){confirmEdit() }) 
     $("#deleteData").on("click", function(){confirmDelete()}) 
-    //$("#closemodalUD2")
-    //$("#closemodalUD")
 
     function cargarFormEdit(value)
     {
-        
-        //$("#ordenarNomb").val('')
         $("#editData").show()
         $("#deleteData").hide()
-
-        //console.log("xd",value)
         
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -480,16 +507,12 @@ $(document).ready(function()
         $("#tipoUsuarioUD").val(value.tipo_usuario)
         $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario) 
         $("#tipoUsuarioUD").attr('readonly', false)
-
     }
 
     function cargarFormDelete(value)
     {
         $("#deleteData").show()
         $("#editData").hide()
-                    
-
-        //console.log("value: ", value)
 
         $("#idUD").val(value.id_usuario)
         $("#idUD").attr('placeholder', value.id_usuario) 
@@ -514,8 +537,57 @@ $(document).ready(function()
         $("#tipoUsuarioUD").attr('placeholder', value.tipo_usuario) 
         $("#tipoUsuarioUD").attr('readonly', true)
 
-
     }
+
+    async function validarRepetidos(array)
+    {   
+        var noRepetido = false
+
+        var dni = array[1].value
+        var email = array[2].value
+        console.log("dni y email", dni, email)
+        
+        var ajax = $.ajax({
+            url: "BackendUsuarios.php", //action
+            type: "POST", //method
+            data: {"funcion": 2, "dni": dni, "email": email},
+            success: 
+            function(respuesta){
+                let check = true
+                var box = JSON.parse(respuesta)
+            }
+        })
+        await ajax 
+        const result = await ajax 
+
+        var box = JSON.parse(result)
+        
+        var dniAjax = box[0].dni
+        var emailAjax = box[1].email
+
+        if(dniAjax == dni)
+        {
+            console.log("dni repetido")
+            noRepetido = false  
+            return noRepetido;
+        }
+        else
+        {   
+            if(emailAjax == email)
+            {
+                console.log("email repetido")
+                noRepetido = false  
+                return noRepetido;
+            }
+            else
+            {
+                console.log("datos no repetidos")
+                noRepetido = true  
+                return noRepetido;
+            }     
+        }
+    }
+
 
     function cargarTabla()
     {   
@@ -526,9 +598,10 @@ $(document).ready(function()
         if (l != ""){
             //console.log("if")
             $.ajax({
+    
             url: "BackendUsuarios.php", //action
             type: "POST", //method
-            data: {"letra": l, "opcion": opt, "filtro": read},
+            data: {"funcion": 1, "letra": l, "opcion": opt, "filtro": read},
             //dataType: "json",
             success: function(respuesta){
                 
@@ -564,12 +637,9 @@ $(document).ready(function()
                     key = key + 1
                     
                     })
-                
                 }
-            
             })
         }
-        
     }
 
     $("#orderBy").change(function(){
