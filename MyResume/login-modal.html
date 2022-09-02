@@ -15,7 +15,7 @@
 
 <body>
 
-<li><a id="btn-login" ><i ></i> <span>LOGIN</span></a></li>
+<li><a href="javascript:login()" ><i ></i> <span>LOGIN</span></a></li>
 
 
 <!-- MODAL -->
@@ -92,21 +92,21 @@
                 <div class="modal-footer">
                     <div class="forgot register-footer" >
                         <span>Ya estas registrado?</span>
-                        <a id="btn-login">Inicia Sesion</a>
+                        <a href="javascript:login()" >Inicia Sesion</a>
                     </div>
                 </div>
         </div>
     </div>
 </div>
-</div> 
+</div>
 
 <!--JS Y JQUERY DEL MODAL-->
 <script>
-$('document').ready(function(){
-    $('#btn-login').click(function(){
+    function login(){
+        $('#registrarse').modal('hide');
         $('#login').modal('show');
-    })
-
+    }
+    $('document').ready(function(){
     $('#registrar').click(function(){
         $('#login').modal('hide');
         $('#registrarse').modal('show');
