@@ -9,8 +9,20 @@ if($funcion < 2)
   $letra = $_POST['letra'];
   $opcion = $_POST['opcion'];
   $filtro = $_POST['filtro'];
+  $dni = $_POST['dni'];
 
-  $q = "SELECT * FROM usuarios WHERE UPPER(nombre_completo) LIKE '%" . strtoupper($letra) . "%'";
+  $q = "SELECT * FROM usuarios WHERE ";
+
+  if($letra != '')
+  {
+    $q = $q . " UPPER(nombre_completo) LIKE '%" . strtoupper($letra) . "%' ";
+  }
+  
+  
+  if($dni > 9999999)
+  {
+    $q = $q."AND dni = '$dni' " ;
+  }
 
   if($filtro == 1)
   {

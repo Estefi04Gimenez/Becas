@@ -123,10 +123,18 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 <!--31/8-->
 
+<!------Cambios al programa------>
 <!--20:25-->
 <!--las funciones 'confirmADdd()', 'validarDatos()' y 'validarRepetidos()' ahora son asincronas para guardar su resultado (true o false) en una variable.
     esto evita que al llamarlas con un if este las tome como false antes de que la funcion termine -->
 
+
+<!--01/9-->
+
+<!------Cambios al programa------>
+<!--21:45-->
+<!-- implementada funcionalidad para filtrar por DNI. 
+si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -147,6 +155,9 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
         <div class="row">
             <div class="col-2">
                 <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
+            </div>
+            <div class="col-3">
+                <input class="form-control altura" type="number" id="ordenarDniTxt" placeholder="filtrar por DNI">
             </div>
             <div class="col-2">
                 <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
@@ -310,13 +321,10 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 <script>
 
- 
-
-
 $(document).ready(function()
 {
     
-    
+
 
     async function confirmAdd()
     {
@@ -355,7 +363,7 @@ $(document).ready(function()
     {
         var valido = true
     
-    if(datos[0].value.length == 0 || datos[0].value.length > 255)
+        if(datos[0].value.length == 0 || datos[0].value.length > 255)
         {   
             alert("Nombre no valido")
             //console.log("Nombre completo no valido",datos[0].value.length)
@@ -592,6 +600,7 @@ $(document).ready(function()
     function cargarTabla()
     {   
         $("#tabla1").empty()
+        var dni = $('#ordenarDniTxt').val()
         var opt = $("#orderBy").val()
         var read = $("#readByTipo").val()
         var l = $("#ordenarNomb").val()
@@ -601,10 +610,10 @@ $(document).ready(function()
     
             url: "BackendUsuarios.php", //action
             type: "POST", //method
-            data: {"funcion": 1, "letra": l, "opcion": opt, "filtro": read},
+            data: {"funcion": 0, "letra": l, "opcion": opt, "filtro": read, "dni": dni}, 
             //dataType: "json",
             success: function(respuesta){
-                
+                console.log(respuesta)
                 var box = JSON.parse(respuesta) 
                 console.log("datos cargados:",box)
 
@@ -650,6 +659,10 @@ $(document).ready(function()
         cargarTabla();
     })
 
+    $("#ordenarDni").click(function(){
+        cargarTabla();
+    })
+
     $("#readByTipo").change(function(){
         cargarTabla();
     })
@@ -657,6 +670,11 @@ $(document).ready(function()
 
 </script>
 <style>
+.sex
+{
+    border: solid, red;
+}
+
 .xd
 {
     text-align: center;
