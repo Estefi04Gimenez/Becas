@@ -335,7 +335,7 @@ $(document).ready(function()
     {
         console.log("validacion exitosa")
         $.ajax({
-            type:"POST",
+            type:"POST",    
             url:"addUsuarios.php",
             data: datos,
             success:function(r){
@@ -595,7 +595,6 @@ $(document).ready(function()
             }     
         }
     }
-
 
     function cargarTabla()
     {   

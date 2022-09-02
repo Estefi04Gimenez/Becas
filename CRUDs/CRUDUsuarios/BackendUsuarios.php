@@ -17,12 +17,13 @@ if($funcion < 2)
   {
     $q = $q . " UPPER(nombre_completo) LIKE '%" . strtoupper($letra) . "%' ";
   }
-  
-  
+
   if($dni > 9999999)
   {
     $q = $q."AND dni = '$dni' " ;
   }
+
+
 
   if($filtro == 1)
   {
