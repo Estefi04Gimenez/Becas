@@ -152,7 +152,7 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
                   <h1>Consulta a base de datos</h1>      
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-2">
                 <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
             </div>
@@ -180,12 +180,12 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
             </div>
                  <!-- The Modal -->
                 <div class="modal fade" data-bs-backdrop="static" id="myModal">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                         
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">Añadir datos</h4>
+                                <h4 class="modal-title" >Añadir datos</h4>
                                 <button id="closeModal(1)" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                         
@@ -214,7 +214,7 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">                                        
+                                            <div class="col">                                        
                                                 <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
                                                 <input name="tipoUsuario" type="text" id="tipoUsuario" min="0" max="1" placeholder="" class="form-control">        
                                             </div>    
@@ -237,6 +237,7 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
                 <table class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                         <tr>
+                            <th class='xd'>Acciones</th>
                             <th class='xd'>ID usuarios</th>
                             <th class='xd'>Nombre Completo</th>
                             <th class='xd'>Email</th>
@@ -244,8 +245,6 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
                             <th class='xd'>Contraseña</th>
                             <th class='xd'>Tipo de usuario</th>
                             <!-- th class='xd'>Datos Personales</th -->
-                            <th class='xd'>Editar</th>
-                            <th class='xd'>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody  id="tabla1">
@@ -256,13 +255,13 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
             <!--<div class="col-2">-->
                 <!-- The Modal -->
                 <div class="modal fade" data-bs-backdrop="static" id="modalUD">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <form id="formUD">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <div class="col-5">
-                                        <h4 class="modal-title">Editar datos</h4>
+                                        <h4 class="modal-title" id="tituloUD">Editar datos</h4>
                                     </div>
                                     <div class="col-2">
                                         <label>id</label><input type="text" class="form-control" name="idUD" id="idUD" readonly>
@@ -324,8 +323,6 @@ si se ingresa un dni que no existe no se carga ningun registro en la tabla-->
 $(document).ready(function()
 {
     
-
-
     async function confirmAdd()
     {
     var datos = $('#formAdd').serializeArray();
@@ -490,6 +487,7 @@ $(document).ready(function()
 
     function cargarFormEdit(value)
     {
+        $('#tituloUD').text('Editar Datos')
         $("#editData").show()
         $("#deleteData").hide()
         
@@ -519,6 +517,7 @@ $(document).ready(function()
 
     function cargarFormDelete(value)
     {
+        $('#tituloUD').text('Eliminar Datos')
         $("#deleteData").show()
         $("#editData").hide()
 
@@ -622,14 +621,22 @@ $(document).ready(function()
                     //console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
+                    "<td class='xd xdwidth'>"+
+                    "<div class='btn-group' role='group' aria-label='Basic example'>"+
+                        "<button class='btn btn-sm btn-secondary text-center' id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD'>"+
+                            "<img class='iconsize' src='../../iconos/edit-3.svg'>"+
+                        "</button>"+
+                        "<button class='btn btn-sm btn-danger text-center' id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD'>"+
+                            "<img class='iconsize' src='../../iconos/trash-2.svg'>"+
+                        "</button>"+
+                    "</div>"+
+                    "</td>"+
                     "<td class='xd'>"+value.id_usuario+"</td>"+
                     "<td class='xd'>"+value.nombre_completo+"</td>"+
                     "<td class='xd'>"+value.email+"</td>"+
                     "<td class='xd'>"+value.dni+"</td>"+
                     "<td class='xd'>"+value.contrasenna+"</td>"+
                     "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-secondary text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD' >"+"<img class='iconsize xd' src='../../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalUD' >"+"<img class='iconsize xd' src='../../../../img/IconoBasura.png'>"+"</td>"+
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
