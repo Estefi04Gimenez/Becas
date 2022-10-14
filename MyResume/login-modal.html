@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    <!--MODAL LINKS-->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body>
+
+<li><a id="btn-login" ><i ></i> <span>LOGIN</span></a></li>
+
+
+<!-- MODAL -->
+<div class="modal fade " id="login" style="padding-top: 4rem;" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- CONTENIDO DEL MODAL-->
+    <div class="col-9 modal-content">
+        <div class="modal-header"  style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4> LOGIN</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+            <form  method="POST" action="login.php">
+                <div class="form-group">
+                    <label for=""> DNI</label>
+                    <input type="text" class="form-control"  name="dni" placeholder="00 111 222">
+                </div>
+                <div class="form-group">
+                    <label for=""> Email</label>
+                    <input type="email" class="form-control"  name="email" placeholder="Email@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for=""> Password</label>
+                    <input type="password" class="form-control" name="contrasena" placeholder="*****">
+                </div><br>
+                <div class="row  justify-content-center m-auto">
+                <button type="submit" class="btn btn-primary " > INGRESAR</button>
+                </div>
+                </form>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>No estas registrado? 
+                            <a id="registrar">Registrate</a>
+                        </span>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+<div class="modal fade " id="registrarse" style="padding-top: 4rem;" role="dialog">
+    <div class="modal-dialog">
+    <!-- CONTENIDO DEL MODAL-->
+    <div class="col-9 modal-content">
+        <div class="modal-header"  style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4> Registrarse</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+                <form  method="POST" action="registrarse.php">
+                    <div class="form-group">
+                        <label for=""> Nombre Completo</label>
+                        <input type="text" class="form-control"  name="reg_nombre_completo" placeholder="Nombre Apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> DNI</label>
+                        <input type="text" class="form-control"  name="reg_dni" placeholder="00 111 222">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> Email</label>
+                        <input type="email" class="form-control"  name="reg_email" placeholder="Email@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> Password</label>
+                        <input type="password" class="form-control" name="reg_contrasena" placeholder="*****">
+                    </div><br>
+                    <div class="row  justify-content-center m-auto">
+                    <button type="submit" class="btn btn-primary " > REGISTRAR</button>
+                    </div>
+                    </form>
+                <div class="modal-footer">
+                    <div class="forgot register-footer" >
+                        <span>Ya estas registrado?</span>
+                        <a id="btn-login">Inicia Sesion</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+<!--JS Y JQUERY DEL MODAL-->
+<script>
+$('document').ready(function(){
+    $('#btn-login').click(function(){
+        $('#login').modal('show');
+    })
+
+    $('#registrar').click(function(){
+        $('#login').modal('hide');
+        $('#registrarse').modal('show');
+    })
+})
+</script>
+
+</body>
+</html>

@@ -26,17 +26,11 @@
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+    <link type="image/png" sizes="32x32" rel="icon" href=".../icons8-familia-hombre-mujer-32.pn">
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="css/style2.css" />
 
-
-    <!--MODAL LINKS-->
-    <!--link rel="stylesheet" href="assets/css/bootstrap.css"-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +60,7 @@
             <ul>
                 <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
                 <li><a href="#cards" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Acerca de:</span></a></li>
-                <li><a href="javascript:login()" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Login</span></a></li>
+                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Login</span></a></li>
             </ul>
         </nav>
         <!-- .nav-menu -->
@@ -91,168 +85,88 @@
     </section>
 
     <!--Acerca de-->
-    <!--div class="row ">
-        <div class="callout bg-secondary"><em>Apoyo económico para los y las estudiantes con el propósito de garantizar el derecho individual y social a la educación. Las becas mencionadas son aplicables en todos los niveles educativos, y consisten en un pago anual.</em> </div>
-    </div-->
+    <div class="row ">
+        <div class="callout bg-primary"><em>Apoyo económico para los y las estudiantes con el propósito de garantizar el derecho individual y social a la educación. Las becas mencionadas son aplicables en todos los niveles educativos, y consisten en un pago anual.</em> </div>
+    </div>
 
+
+
+    <!--div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/img/carousel1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/colectivo.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/junt.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div-->
+    <!--Fin acerca de-->
+
+
+    <!--NOVEDADES-->
 
     <div class="row" id="cards">
         <div class="col-3">
-            <div class="card">
+            <div class="card" style="width: 18rem;">
                 <img src="assets\img\annie-spratt-QckxruozjRg-unsplash.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Becas de Estudios</h5>
+                    <h3>Becas de Estudios</h3>
                     <p class="card-text"> ayudas para la realización de estudios o investigaciones científicas, y están orientadas a estudiantes de todas las etapas educativas.</p>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="card">
+            <div class="card" style="width: 18rem;">
                 <img src="assets\img\jonathan-chng-HgoKvtKpyHA-unsplash.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Becas Deportivas</h5>
+                    <h3>Becas Deportivas</h3>
                     <p class="card-text">tiene como objetivo permitir que estudiantes que presenten dificultades socio-económicas para realizar el pago del carnet anual en la Dirección de Deportes de la SAE UNC, puedan practicar la disciplina deportiva en la que estén interesados/as
                         en forma competitiva o recreativa.</p>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="card">
+            <div class="card" style="width: 18rem;">
                 <img src="assets/img/omnibus.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Beca de Transporte</h5>
+                    <h3>Beca de Transporte</h3>
                     <p class="card-text">El Programa de Becas de Transporte, Conectividad y Bibliografía tiene como finalidad primordial facilitar el acceso y permanencia a los estudios impartidos en esta Facultad para las/os estudiantes que padezcan desventajas socioeconómicas,
                         ajustándose la misma a la presente reglamentación.</p>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="card">
+            <div class="card" style="width: 18rem;">
                 <img src="assets/img/libros.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Becas de Formación Práctica</h5>
-                    <p class="card-text">ayudas que conceden ciertas entidades o empresas para facilitar el acceso al mercado laboral de los estudiantes y que puedan iniciar su carrera profesional en alguna empresa u organismo público o privado realizando un periodo de prácticas
+                    <h3>Becas de Formación Práctica</h3>
+                    <p class="card-text">yudas que conceden ciertas entidades o empresas para facilitar el acceso al mercado laboral de los estudiantes y que puedan iniciar su carrera profesional en alguna empresa u organismo público o privado realizando un periodo de prácticas
                         pudiendo ser remuneradas o no.</p>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!--NOVEDADES-->
-
-
-
     <!--FIN NOVEDADES-->
 
 
-
-
-    <!-- MODAL -->
-    <div class="modal fade " id="login" style="padding-top: 4rem;" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- CONTENIDO DEL MODAL-->
-            <div class="col-9 modal-content">
-                <div class="modal-header" style="padding:35px 50px;">
-                    <a href="javascript:cerrar()" class="close"><i ></i> <span>&times;</span></a>
-
-                    <h4>Log In</h4>
-                </div>
-                <div class="modal-body" style="padding:40px 50px;">
-                    <form method="POST" action="login.php">
-                        <div class="form-group">
-                            <label for=""> DNI</label>
-                            <input type="text" class="form-control" name="dni" placeholder="00 000 000">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="Email@gmail.com">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Password</label>
-                            <input type="password" class="form-control" name="contrasena" placeholder="**********">
-                        </div><br>
-                        <div class="row  justify-content-center m-auto">
-                            <button type="submit" class="btn btn-primary "> INGRESAR</button>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>No estas registrado? 
-                            <a id="registrar">Registrate</a>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade " id="registrarse" style="padding-top: 4rem;" role="dialog">
-        <div class="modal-dialog">
-            <!-- CONTENIDO DEL MODAL-->
-            <div class="col-9 modal-content">
-                <div class="modal-header" style="padding:35px 50px;">
-
-                    <a href="javascript:cerrar()" class="close"><i ></i> <span>&times;</span></a>
-                    <h4 style="text-align: center;"> Registrarse</h4>
-                </div>
-                <div class="modal-body" style="padding:40px 50px;">
-                    <form method="POST" action="registrarse.php">
-                        <div class="form-group">
-                            <label for=""> Nombre Completo</label>
-                            <input type="text" class="form-control" name="reg_nombre_completo" placeholder="Nombre Apellido">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> DNI</label>
-                            <input type="text" class="form-control" name="reg_dni" placeholder="00 111 222">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Email</label>
-                            <input type="email" class="form-control" name="reg_email" placeholder="Email@gmail.com">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Password</label>
-                            <input type="password" class="form-control" name="reg_contrasena" placeholder="***">
-                        </div><br>
-                        <div class="row  justify-content-center m-auto">
-                            <button type="submit" class="btn btn-primary "> REGISTRAR</button>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <div class="forgot register-footer">
-                            <span>Ya estas registrado?</span>
-                            <a href="javascript:login()">Inicia Sesion</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--JS Y JQUERY DEL MODAL-->
-    <script>
-        function login() {
-            $('#registrarse').modal('hide');
-            $('#login').modal('show');
-        }
-
-        function cerrar() {
-            $('#registrarse').modal('hide');
-            $('#login').modal('hide');
-        }
-        $('document').ready(function() {
-            $('#cerrar').click(function() {
-                $('#login').modal('hide');
-            })
-            $('#registrar').click(function() {
-                $('#login').modal('hide');
-                $('#registrarse').modal('show');
-            })
-        })
-    </script>
 
 
     <!-- ======= Footer ======= -->

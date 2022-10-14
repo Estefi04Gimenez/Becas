@@ -1,11 +1,14 @@
 <?php
-//parametros para la conexión
-$dbip = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "becas";
-//conexió
-//api mysql para php
-$con = mysqli_connect($dbip, $dbuser, $dbpass, $dbname);
-
+    //parametros de la conexion
+    $dbip="localhost";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="becas";
+    //conexion
+    //api mysql para php
+    $con=mysqli_connect($dbip,$dbuser,$dbpass,$dbname);
+    if(mysqli_connect_errno()){
+        echo'Conexion Fallida: ',mysqli_connect_error();
+        exit();
+    }
 ?>
