@@ -86,7 +86,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
             </div>
             <div class="col-2">
-                <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
+                <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por" style="display: none; width: 1px;">
                     <option class="form-control altura" value="0">Ordenar por...</option>
                     <option class="form-control altura" value="1">Fecha de nacimiento ↑</option>
                     <option class="form-control altura" value="2">Fecha de nacimiento ↓</option>
@@ -339,7 +339,7 @@ $(document).ready(function()
         var eliminarDatos = $("#formAV").serializeArray();
         //console.log("editarDatos: ", eliminarDatos)
         $.ajax({
-        url: "BackendTutoresEdit.php",
+        url: "BackendTutoresDelete.php",
         type: "POST",
         data: eliminarDatos,
         success: function(r){
@@ -359,89 +359,6 @@ $(document).ready(function()
     $("#deleteData").on("click", function(){confirmDelete()}) 
     //$("#closemodalAV2")
     //$("#closemodalAV")
-
-    function cargarFormEdit(value)
-    {
-        
-        //$("#ordenarNomb").val('')
-        $("#editData").show()
-        $("#deleteData").hide()
-
-        console.log("xd",value)
-        
-        $("#idAV").val(value.id_tutor)
-        $("#idAV").attr('placeholder', value.id_tutor) 
-        
-        $("#nombre_completoAV").val(value.nombre_completo)
-        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombre_completoAV").attr('readonly', false)
-        
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', false)
-        
-        $("#cuilAV").val(value.cuil)
-        $("#cuilAV").attr('placeholder', value.cuil) 
-        $("#cuilAV").attr('readonly', false)
-        
-        $("#telAV").val(value.tel)
-        $("#telAV").attr('placeholder', value.tel) 
-        $("#telAV").attr('readonly', false)
-        
-        $("#domicilioAV").val(value.domicilio)
-        $("#domicilioAV").attr('placeholder', value.domicilio) 
-        $("#domicilioAV").attr('readonly', false)
-
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', false)
-
-        $("#id_ocupacionAV").val(value.id_ocupacion)
-        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
-        $("#id_ocupacionAV").attr('readonly', false)
-
-    }
-
-    function cargarFormDelete(value)
-    {
-        $("#deleteData").show()
-        $("#editData").hide()
-                    
-
-        console.log("value: ", value)
-
-        $("#idAV").val(value.id_tutor)
-        $("#idAV").attr('placeholder', value.id_tutor) 
-        
-        $("#nombre_completoAV").val(value.nombre_completo)
-        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombre_completoAV").attr('readonly', true)
-        
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', true)
-        
-        $("#cuilAV").val(value.cuil)
-        $("#cuilAV").attr('placeholder', value.cuil) 
-        $("#cuilAV").attr('readonly', true)
-        
-        $("#telAV").val(value.tel)
-        $("#telAV").attr('placeholder', value.tel) 
-        $("#telAV").attr('readonly', true)
-        
-        $("#domicilioAV").val(value.domicilio)
-        $("#domicilioAV").attr('placeholder', value.domicilio) 
-        $("#domicilioAV").attr('readonly', true)
-
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', true)
-
-        $("#id_ocupacionAV").val(value.id_ocupacion)
-        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
-        $("#id_ocupacionAV").attr('disabled', true)
-
-    }
 
     function cargarTabla()
     {   
@@ -474,8 +391,8 @@ $(document).ready(function()
                     "<td class='xd'>"+value.domicilio+"</td>"+
                     "<td class='xd'>"+value.email+"</td>"+
                     "<td class='xd'>"+value.id_ocupacion+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/editar.png'>"+"</button>"+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/borrar.png'>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/editar.png' style='height:40px'>"+"</button>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/borrar.png' style='height:40px'>"+"</td>"+
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
@@ -508,25 +425,90 @@ $(document).ready(function()
     })     
 })
 
+function cargarFormEdit(value)
+    {
+        
+        //$("#ordenarNomb").val('')
+        $("#editData").show()
+        $("#deleteData").hide()
+
+        console.log("xd",value)
+        
+        $("#idAV").val(value.id_tutor)
+        $("#idAV").attr('placeholder', value.id_tutor) 
+        
+        $("#nombre_completoAV").val(value.nombre_completo)
+        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombre_completoAV").attr('readonly', false)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', false)
+
+        $("#cuilAV").val(value.cuil)
+        $("#cuilAV").attr('placeholder', value.cuil) 
+        $("#cuilAV").attr('readonly', false)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', false)
+        
+        $("#domicilioAV").val(value.domicilio)
+        $("#domicilioAV").attr('placeholder', value.domicilio) 
+        $("#domicilioAV").attr('readonly', false)
+        
+        $("#telAV").val(value.tel)
+        $("#telAV").attr('placeholder', value.tel) 
+        $("#telAV").attr('readonly', false)
+
+        $("#id_ocupacionAV").val(value.id_ocupacion)
+        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
+        $("#id_ocupacionAV").attr('readonly', false)
+
+    }
+
+    function cargarFormDelete(value)
+    {
+        $("#deleteData").show()
+        $("#editData").hide()
+                    
+
+        console.log("value: ", value)
+
+        $("#idAV").val(value.id_tutor)
+        $("#idAV").attr('placeholder', value.id_tutor) 
+        
+        $("#nombre_completoAV").val(value.nombre_completo)
+        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombre_completoAV").attr('readonly', true)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', true)
+
+        $("#cuilAV").val(value.cuil)
+        $("#cuilAV").attr('placeholder', value.cuil) 
+        $("#cuilAV").attr('readonly', true)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', true)
+        
+        $("#domicilioAV").val(value.domicilio)
+        $("#domicilioAV").attr('placeholder', value.domicilio) 
+        $("#domicilioAV").attr('readonly', true)
+        
+        $("#telAV").val(value.tel)
+        $("#telAV").attr('placeholder', value.tel) 
+        $("#telAV").attr('readonly', true)
+
+        $("#id_ocupacionAV").val(value.id_ocupacion)
+        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
+        $("#id_ocupacionAV").attr('disabled', true)
+
+
+    }
+
 
 
 </script>
-<style>
-.xd
-{
-    text-align: center;
-}
-
-.iconsize
-{
-    height: 30px;
-    width: 30px;
-}
-
-.altura
-{
-    height: 40px;
-}
-
-
-</style>

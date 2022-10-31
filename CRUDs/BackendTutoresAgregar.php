@@ -33,6 +33,9 @@ if (valida_texto($cuil,11)==false){
 if (valida_texto($id_ocupacion,11)==false){
     $valida=1;
 }
+if (valida_dni($dni)==true){
+    $valida=1;
+}
 
 
 
@@ -50,10 +53,6 @@ if($valida==0){
 
 
 if (valida_texto($nombre_completo, 255))
-
-
-
-
 
 
  echo $r;
