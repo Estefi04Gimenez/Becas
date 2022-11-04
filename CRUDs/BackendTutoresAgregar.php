@@ -36,6 +36,9 @@ if (valida_texto($id_ocupacion,11)==false){
 if (valida_dni($dni)==true){
     $valida=1;
 }
+if (valida_email($email)==true){
+    $valida=1;
+}
 
 
 

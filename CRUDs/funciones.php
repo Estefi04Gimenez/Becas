@@ -35,7 +35,18 @@ function valida_texto($tx,$l){
         }
     }
 
-    function valida_
+    function valida_email($email){
+        require 'conexion.php';
+        $resultado=true;
+        $puntomail = '.';
+        $arrobamail = '@';
+        $coincidencia1 = strpos($email, $puntomail);
+        $coincidencia2 = strpos($email, $arrobamail);
+        if (!($coincidencia1 && $coincidencia2)){
+            $resultado=false;
+            return $repetido;
+        }
+    }
 
 
 ?>
