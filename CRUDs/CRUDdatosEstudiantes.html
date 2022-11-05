@@ -86,7 +86,7 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <input class="form-control altura" type="text" id="ordenarNomb" placeholder="Buscar Nombre">
             </div>
             <div class="col-2">
-                <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por">
+                <select class="form-control altura" id="orderBy" value="0" placeholder="ordenar por" style="display: none; width: 1px;">
                     <option class="form-control altura" value="0">Ordenar por...</option>
                     <option class="form-control altura" value="1">Fecha de nacimiento ↑</option>
                     <option class="form-control altura" value="2">Fecha de nacimiento ↓</option>
@@ -157,24 +157,6 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                                   </select>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12">                                        
-                                                <label for="texto de ejemplo" class="form-label">Fotocopia de DNI</label>
-                                                <input name="fotocpia_dni" type="text" id="fotocpia_dni" class="form-control">        
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">                                        
-                                                <label for="texto de ejemplo" class="form-label">Expediente de anses</label>
-                                                <input name="expediente_anses" type="text" id="expediente_anses" class="form-control">        
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">                                        
-                                                <label for="texto de ejemplo" class="form-label">Centificado de haberes</label>
-                                                <input name="certificado_haberes" type="text" id="certificado_haberes" class="form-control">        
-                                            </div>
-                                        </div>
                                     </div>
                                 </form>    
                             </div>
@@ -193,12 +175,15 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class='xd'>ID usuarios</th>
+                            <th class='xd'>ID tutor</th>
                             <th class='xd'>Nombre Completo</th>
                             <th class='xd'>DNI</th>
+                            <th class='xd'>Cuil</th>
+                            <th class='xd'>Telefono</th>
+                            <th class='xd'>Domicilio</th>
                             <th class='xd'>Email</th>
-                            <th class='xd'>Contraseña</th>
-                            <th class='xd'>Tipo de usuario</th>
+                            <th class='xd'>Ocupación</th>
+
                             <!-- th class='xd'>Datos Personales</th -->
                             <th class='xd'>Editar</th>
                             <th class='xd'>Eliminar</th>
@@ -228,37 +213,54 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                     </div>
                                 </div>
                         
-                                <!-- Modal body -->
-                                <div class="container"> 
+                            <!-- Modal body -->
+                            <div class="container"> 
+                                <form id="modalDel">
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Nombre Completo</label>
-                                                <input name="nombreCompletoAV" type="text" id="nombreCompletoAV" placeholder="" class="form-control">        
+                                            <div class="col-12">                                        
+                                                <label for="texto de ejemplo" class="form-label">Nombre completo</label>
+                                                <input name="nombre_completoAV" type="text" id="nombre_completoAV" placeholder="Jorge Alfarero" class="form-control">        
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">DNI</label>
-                                                <input name="dniAV" type="text" id="dniAV" placeholder="" class="form-control"> 
-                                            </div>       
+                                                <input name="dniAV" type="number" id="dniAV" placeholder="" class="form-control">        
+                                            </div>
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">CUIL</label>
+                                                <input name="cuilAV" type="number" id="cuilAV" placeholder="" class="form-control">        
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Telefono</label>
+                                                <input name="telAV" type="number" id="telAV" placeholder="" class="form-control">        
+                                            </div>
+                                            <div class="col-6">                                        
+                                                <label for="texto de ejemplo" class="form-label">Domicilio</label>
+                                                <input name="domicilioAV" type="text" id="domicilioAV" placeholder="" class="form-control">        
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Email</label>
-                                                <input name="emailAV" type="text" id="emailAV" placeholder="" class="form-control">        
+                                                <input name="emailAV" type="email" id="emailAV" placeholder="jorgealfarero@mail.com" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Contraseña</label>
-                                                <input name="contrasennaAV" type="text" id="contrasennaAV"  class="form-control">       
+                                                <label for="texto de ejemplo" class="form-label">Ocupación</label>
+                                                <select id="id_ocupacionAV" name="id_ocupacionAV" class="form-select" aria-label="Default select example">
+                                                    <option selected>Seleccionar</option>
+                                                    <option value="1">Desocupado</option>
+                                                    <option value="2">Empleado</option>
+                                                    <option value="3">Monotributista</option>
+                                                  </select>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">Tipo de usuario</label>
-                                                <input name="tipoUsuarioAV" type="text" id="tipoUsuarioAV" placeholder="" class="form-control">        
-                                            </div>    
                                         </div>
                                     </div>
-                                </div>
+                                </form>    
+                            </div>
                             </form>  
                             <!-- Modal footer -->
                             <div class="modal-footer">
@@ -277,6 +279,10 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
 
 <script>
 
+$('#botonModal').click(function(){
+       document.getElementById("formAdd").reset();
+                        })
+
     
 $(document).ready(function()
 {
@@ -286,7 +292,7 @@ $(document).ready(function()
     //console.log("datos:",datos)
         $.ajax({
             type:"POST",
-            url:"BackendTutores.php",
+            url:"BackendTutoresAgregar.php",
             data: datos,
             success:function(r){
                 if(r == 1)
@@ -297,7 +303,7 @@ $(document).ready(function()
                     $("#myModal").modal('hide')
                 }else
                 {
-                    alert("Fallo");
+                    alert("Verifique que los campos sean correctos");
                 }
             }
         })
@@ -308,7 +314,7 @@ $(document).ready(function()
     var editarDatos = $("#formAV").serializeArray();
         //console.log("editarDatos: ", editarDatos)
         $.ajax({
-        url: "RenameUsuarios.php",
+        url: "BackendTutoresEdit.php",
         type: "POST",
         data: editarDatos,
         success: function(r)
@@ -322,6 +328,7 @@ $(document).ready(function()
                 $("#modalAV").modal('hide')
 
                 }
+                else{ alert("error en la actualizacion de datos")}
             }
         })
 
@@ -332,7 +339,7 @@ $(document).ready(function()
         var eliminarDatos = $("#formAV").serializeArray();
         //console.log("editarDatos: ", eliminarDatos)
         $.ajax({
-        url: "DeleteUsuarios.php",
+        url: "BackendTutoresDelete.php",
         type: "POST",
         data: eliminarDatos,
         success: function(r){
@@ -353,74 +360,6 @@ $(document).ready(function()
     //$("#closemodalAV2")
     //$("#closemodalAV")
 
-    function cargarFormEdit(value)
-    {
-        
-        //$("#ordenarNomb").val('')
-        $("#editData").show()
-        $("#deleteData").hide()
-
-        console.log("xd",value)
-        
-        $("#idAV").val(value.id_usuario)
-        $("#idAV").attr('placeholder', value.id_usuario) 
-        
-        $("#nombreCompletoAV").val(value.nombre_completo)
-        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombreCompletoAV").attr('readonly', false)
-        
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', false)
-        
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', false)
-        
-        $("#contrasennaAV").val(value.contrasenna)
-        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-        $("#contrasennaAV").attr('readonly', false)
-        
-        $("#tipoUsuarioAV").val(value.tipo_usuario)
-        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-        $("#tipoUsuarioAV").attr('readonly', false)
-
-    }
-
-    function cargarFormDelete(value)
-    {
-        $("#deleteData").show()
-        $("#editData").hide()
-                    
-
-        console.log("value: ", value)
-
-        $("#idAV").val(value.id_usuario)
-        $("#idAV").attr('placeholder', value.id_usuario) 
-        
-        $("#nombreCompletoAV").val(value.nombre_completo)
-        $("#nombreCompletoAV").attr('placeholder', value.nombre_completo) 
-        $("#nombreCompletoAV").attr('readonly', true)
-        
-        $("#dniAV").val(value.dni)
-        $("#dniAV").attr('placeholder', value.dni) 
-        $("#dniAV").attr('readonly', true)
-        
-        $("#emailAV").val(value.email)
-        $("#emailAV").attr('placeholder', value.email) 
-        $("#emailAV").attr('readonly', true)
-        
-        $("#contrasennaAV").val(value.contrasenna)
-        $("#contrasennaAV").attr('placeholder', value.contrasenna) 
-        $("#contrasennaAV").attr('readonly', true)
-        
-        $("#tipoUsuarioAV").val(value.tipo_usuario)
-        $("#tipoUsuarioAV").attr('placeholder', value.tipo_usuario) 
-        $("#tipoUsuarioAV").attr('readonly', true)
-
-
-    }
-
     function cargarTabla()
     {   
         $("#tabla1").empty()
@@ -429,7 +368,7 @@ $(document).ready(function()
         if (l != ""){
             //console.log("if")
             $.ajax({
-            url: "BackendUsuarios.php", //action
+            url: "BackendTutores2.php", //action
             type: "POST", //method
             data: {"letra": l, "opcion": opt},
             //dataType: "json",
@@ -444,14 +383,16 @@ $(document).ready(function()
                     console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
-                    "<td class='xd'>"+value.id_usuario+"</td>"+
+                    "<td class='xd'>"+value.id_tutor+"</td>"+
                     "<td class='xd'>"+value.nombre_completo+"</td>"+
-                    "<td class='xd'>"+value.email+"</td>"+
                     "<td class='xd'>"+value.dni+"</td>"+
-                    "<td class='xd'>"+value.contrasenna+"</td>"+
-                    "<td class='xd'>"+value.tipo_usuario+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoLapiz.png'>"+"</button>"+"</td>"+
-                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='../../../img/IconoBasura.png'>"+"</td>"+
+                    "<td class='xd'>"+value.cuil+"</td>"+
+                    "<td class='xd'>"+value.tel+"</td>"+
+                    "<td class='xd'>"+value.domicilio+"</td>"+
+                    "<td class='xd'>"+value.email+"</td>"+
+                    "<td class='xd'>"+value.id_ocupacion+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/editar.png' style='height:40px'>"+"</button>"+"</td>"+
+                    "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/borrar.png' style='height:40px'>"+"</td>"+
                     "</tr>") 
                     
                     $("#edit"+key).on("click", function(){
@@ -484,25 +425,90 @@ $(document).ready(function()
     })     
 })
 
+function cargarFormEdit(value)
+    {
+        
+        //$("#ordenarNomb").val('')
+        $("#editData").show()
+        $("#deleteData").hide()
+
+        console.log("xd",value)
+        
+        $("#idAV").val(value.id_tutor)
+        $("#idAV").attr('placeholder', value.id_tutor) 
+        
+        $("#nombre_completoAV").val(value.nombre_completo)
+        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombre_completoAV").attr('readonly', false)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', false)
+
+        $("#cuilAV").val(value.cuil)
+        $("#cuilAV").attr('placeholder', value.cuil) 
+        $("#cuilAV").attr('readonly', false)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', false)
+        
+        $("#domicilioAV").val(value.domicilio)
+        $("#domicilioAV").attr('placeholder', value.domicilio) 
+        $("#domicilioAV").attr('readonly', false)
+        
+        $("#telAV").val(value.tel)
+        $("#telAV").attr('placeholder', value.tel) 
+        $("#telAV").attr('readonly', false)
+
+        $("#id_ocupacionAV").val(value.id_ocupacion)
+        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
+        $("#id_ocupacionAV").attr('readonly', false)
+
+    }
+
+    function cargarFormDelete(value)
+    {
+        $("#deleteData").show()
+        $("#editData").hide()
+                    
+
+        console.log("value: ", value)
+
+        $("#idAV").val(value.id_tutor)
+        $("#idAV").attr('placeholder', value.id_tutor) 
+        
+        $("#nombre_completoAV").val(value.nombre_completo)
+        $("#nombre_completoAV").attr('placeholder', value.nombre_completo) 
+        $("#nombre_completoAV").attr('readonly', true)
+        
+        $("#dniAV").val(value.dni)
+        $("#dniAV").attr('placeholder', value.dni) 
+        $("#dniAV").attr('readonly', true)
+
+        $("#cuilAV").val(value.cuil)
+        $("#cuilAV").attr('placeholder', value.cuil) 
+        $("#cuilAV").attr('readonly', true)
+        
+        $("#emailAV").val(value.email)
+        $("#emailAV").attr('placeholder', value.email) 
+        $("#emailAV").attr('readonly', true)
+        
+        $("#domicilioAV").val(value.domicilio)
+        $("#domicilioAV").attr('placeholder', value.domicilio) 
+        $("#domicilioAV").attr('readonly', true)
+        
+        $("#telAV").val(value.tel)
+        $("#telAV").attr('placeholder', value.tel) 
+        $("#telAV").attr('readonly', true)
+
+        $("#id_ocupacionAV").val(value.id_ocupacion)
+        $("#id_ocupacionAV").attr('placeholder', value.id_ocupacion) 
+        $("#id_ocupacionAV").attr('disabled', true)
+
+
+    }
+
 
 
 </script>
-<style>
-.xd
-{
-    text-align: center;
-}
-
-.iconsize
-{
-    height: 30px;
-    width: 30px;
-}
-
-.altura
-{
-    height: 40px;
-}
-
-
-</style>
