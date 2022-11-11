@@ -1,4 +1,69 @@
 <!DOCTYPE html>
+<!------CRUD de usuarios------>
+<!--documentacion//changelog-->
+
+<!--16/8-->
+
+<!------Cambios al programa------>
+<!--implementada la funcion para dar de alta una fila-->
+<!--implementada la funcion para editar una fila-->
+<!--implementada la funcion para leer la tabla por el campo "nombre_completo"-->
+
+<!------Cambios a la interfaz------>
+<!-- cambios a las etiquetas th y td para que se puedan completar con los datos de la tabla usuarios  -->
+<!-- cambios a las etiquetas label de "myModal", "MmdalEdit" y "MmdalDelete" para que sean iguales a los campos de la tabla usuarios  -->
+<!-- cambios a los parametros id y name de los input de "myModal", "MmdalEdit" y "MmdalDelete" para implementar las funciones correspondientes a cada uno  -->
+
+<!------Cambios a la estructura del codigo------>
+<!-- ahora la funcion que carga la tabla (Junto a las funcionalidades de Editar y Eliminar) esta declarada como "function cargarTabla()".
+Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recargar la tabla sin que sea necesario copiar y pegar las 125 lineas de codigo de la funcion entera  -->
+
+<!------Mejoras al programa------>
+<!-- Ahora la tabla se recarga al dar de alta  
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
+
+
+    
+<!--18/8-->
+
+<!------Cambios al programa------>
+<!--17: 31-->
+<!--implementada la funcion para dar de baja una fila-->
+<!--23: 26-->
+<!--modalAV ahor se oculta al dar de baja o alta-->
+
+<!------Cambios a la interfaz------>
+<!--19: 53-->
+<!-- La funcionalidad de dar de baja y editar datos ahora usan el mismo formulario en el mismo modal -->
+
+<!------Cambios a la estructura del codigo------>
+<!--15: 46-->
+<!--La funcionalidad de editar datos fue agregada en una funcion declarada como "loadFormedit()"" -->
+<!--el array json recibido de "BackendUsuarios.php" ahora se convierte en array de JavaScript mediante la funcion JSON.parse y se guarda en la variable "box" -->
+<!--17: 31-->
+<!--La funcionalidad de eliminar datos fue agregada en una funcion declarada como "cargarFormDelete()" -->
+<!--23: 06-->
+<!--consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" agregadas a las funciones declaradas como "confirmEdit()" y "confirmDelete()"
+    Esto permite solucionar error en el que las consultas de ajax se repetien el numero de veces que se hacia click en los botones de editar y/o borrar-->
+
+<!------Mejoras al programa------>
+<!--23: 06-->
+<!--solucionado error en el que las consultas de ajax a "DeleteUsuarios.php" y "RenameUsuarios.php" se repetian en bucle causando que el alerta que 
+    confirma si los fueron elminados o editados con exito se repita el numero de veces que se hacia click en los botones de editar y/o borrar-->
+<!--23: 26-->
+<!-- Ahora la tabla se recarga al dar de baja o editar 
+    Nota: se recarga bajo los datos enviados en la variable "l" en la funcion "cargarTabla()"-->
+
+<!--19/8-->
+
+<!------Cambios a la estructura del codigo------>
+<!--15: 21-->
+<!--las funciones "confirmEdit()" y "confirmDelete()" ahora guardan el formulario para editar o borrar en un array utilizando ").serializeArray(" -->
+
+<!------Mejoras al programa------>
+<!--16: 30-->
+<!-- Ahora, al dar de alta o editar se muestra el registro en la tabla-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -110,24 +175,14 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class='xd'>Estudiante</th>
-                            <th class='xd'>Solicitud de inscripcion</th>
-                            <th class='xd'>Certificado de egresado</th>
-                            <th class='xd'>Boletin</th>
-                            <th class='xd'>Constancia de inscripcion</th>
-                            <th class='xd'>Curso de ingreso aprobado</th>
-                            <th class='xd'>Plan de estudio</th>
-                            <th class='xd'>Certificado materias aprobadas</th>
-                            <th class='xd'>Cambio de carrera</th>
-                            <th class='xd'>Año en curso</th>
-                            <th class='xd'>instituto</th>
-                            <th class='xd'>Localizacion</th>
-                            <th class='xd'>Fecha de inscripcion</th>
-                            <th class='xd'>Fecha modificacion</th>
-                            <th class='xd'>Id personal</th>
-
-
-
+                            <th class='xd'>ID tutor</th>
+                            <th class='xd'>Nombre Completo</th>
+                            <th class='xd'>DNI</th>
+                            <th class='xd'>Cuil</th>
+                            <th class='xd'>Telefono</th>
+                            <th class='xd'>Domicilio</th>
+                            <th class='xd'>Email</th>
+                            <th class='xd'>Ocupación</th>
 
                             <!-- th class='xd'>Datos Personales</th -->
                             <th class='xd'>Editar</th>
@@ -313,7 +368,7 @@ $(document).ready(function()
         if (l != ""){
             //console.log("if")
             $.ajax({
-            url: "BackendaDatosEstudiantes2.php", //action
+            url: "BackendDatosPersonales2.php", //action
             type: "POST", //method
             data: {"letra": l, "opcion": opt},
             //dataType: "json",
@@ -328,20 +383,18 @@ $(document).ready(function()
                     console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
-                    "<td class='xd'>"+value.id_estudiante+"</td>"+
-                    "<td class='xd'>"+value.solicitud_inscripcion+"</td>"+
-                    "<td class='xd'>"+value.certificado_egresado+"</td>"+
-                    "<td class='xd'>"+value.boletin+"</td>"+
-                    "<td class='xd'>"+value.constancia_inscripcion+"</td>"+
-                    "<td class='xd'>"+value.curso_ingreso_aprobado+"</td>"+
-                    "<td class='xd'>"+value.plan_estudio+"</td>"+
-                    "<td class='xd'>"+value.certificado_materias_aprobadas+"</td>"+
-                    "<td class='xd'>"+value.cambio_de_carrera+"</td>"+
-                    "<td class='xd'>"+value.año_en_curso+"</td>"+
-                    "<td class='xd'>"+value.id_instituto+"</td>"+
-                    "<td class='xd'>"+value.id_localizacion_instituto+"</td>"+
-                    "<td class='xd'>"+value.fch_inscripcion+"</td>"+
                     "<td class='xd'>"+value.id_personal+"</td>"+
+                    "<td class='xd'>"+value.id_usuario+"</td>"+
+                    "<td class='xd'>"+value.genero+"</td>"+
+                    "<td class='xd'>"+value.fch_nacimiento+"</td>"+
+                    "<td class='xd'>"+value.tel+"</td>"+
+                    "<td class='xd'>"+value.cuil+"</td>"+
+                    "<td class='xd'>"+value.fotocopia_dni+"</td>"+
+                    "<td class='xd'>"+value.expediente_anses+"</td>"+
+                    "<td class='xd'>"+value.certificado_nac+"</td>"+
+                    "<td class='xd'>"+value.certificado_domicilio+"</td>"+
+                    "<td class='xd'>"+value.domicilio+"</td>"+
+                    "<td class='xd'>"+value.estado_academico+"</td>"+
                     "<td class='xd'>"+value.fch_modificacion+"</td>"+
                     "<td class='xd'>"+"<button class='btn btn-sm btn-info text-center'  id='edit"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/editar.png' style='height:40px'>"+"</button>"+"</td>"+
                     "<td class='xd'>"+"<button class='btn btn-sm btn-danger text-center'  id='delete"+key+"' data-bs-toggle='modal' data-bs-target='#modalAV' >"+"<img class='iconsize xd' src='img/borrar.png' style='height:40px'>"+"</td>"+

@@ -3,7 +3,7 @@ require 'conexion.php';
 $letra = $_POST['letra'];
 $opcion = $_POST['opcion'];
 
-$q = "SELECT * FROM datos_estudiantes, usuarios WHERE UPPER(usuarios.nombre_completo) LIKE '%" . strtoupper($letra) . "%' AND datos_estudiantes.id = usuarios.id";
+$q = "SELECT * FROM datos_personales, usuarios WHERE UPPER(usuarios.nombre_completo) LIKE '%" . strtoupper($letra) . "%' AND id_usuario = id_usuarios";
 //$q = "select * from alumnos3";
 
 
