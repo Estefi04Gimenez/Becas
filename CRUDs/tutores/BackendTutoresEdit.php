@@ -1,7 +1,7 @@
 <?php
 
-require 'conexion.php';
-require 'funciones.php';
+require '../conexion.php';
+require '../funciones.php';
 
 $id = $_POST['idAV'];
 $nombre_completo = $_POST['nombre_completoAV'];

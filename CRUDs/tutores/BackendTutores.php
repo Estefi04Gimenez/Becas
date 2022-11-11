@@ -1,6 +1,6 @@
 <?php
 
-require 'conexion.php';
+require '../conexion.php';
 
 
 $nombre_completo = $_POST['nombre_completo'];

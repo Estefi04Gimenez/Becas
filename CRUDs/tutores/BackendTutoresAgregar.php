@@ -1,7 +1,7 @@
 <?php
 
-require 'conexion.php';
-require 'funciones.php';
+require '../conexion.php';
+require '../funciones.php';
 
 $nombre_completo = $_POST['nombre_completo'];
 $dni = $_POST['dni'];

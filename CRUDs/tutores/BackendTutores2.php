@@ -1,5 +1,5 @@
 <?php
-require 'conexion.php';
+require '../conexion.php';
 $letra = $_POST['letra'];
 $opcion = $_POST['opcion'];
 
