@@ -115,16 +115,16 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                                         <div class="row">
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">ID</label>
-                                                <input name="nombre" type="number" disabled id="id_tutor" placeholder="" class="form-control">        
+                                                <input name="nombre" type="number" disabled id="id_personal" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
                                                 <label for="texto de ejemplo" class="form-label">Nombre completo</label>
-                                                <input name="nombre_completo" type="text" id="nombre_completo" placeholder="Jorge Alfarero" class="form-control">        
+                                                <input name="nombre_completo" type="text" disabled id="nombre_completo" placeholder="Jorge Alfarero" class="form-control">        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">                                        
-                                                <label for="texto de ejemplo" class="form-label">DNI</label>
+                                                <label for="texto de ejemplo" class="form-label">id_usuario</label>
                                                 <input name="dni" type="number" id="dni" placeholder="" class="form-control">        
                                             </div>
                                             <div class="col-6">                                        
@@ -175,14 +175,20 @@ Permitiendo llamar esa funcion en cualquier parte del codigo para cargar o recar
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class='xd'>ID tutor</th>
-                            <th class='xd'>Nombre Completo</th>
-                            <th class='xd'>DNI</th>
-                            <th class='xd'>Cuil</th>
-                            <th class='xd'>Telefono</th>
-                            <th class='xd'>Domicilio</th>
-                            <th class='xd'>Email</th>
-                            <th class='xd'>Ocupación</th>
+                            <th class='xd'>nombre</th>
+                            <th class='xd'>id personal</th>
+                            <th class='xd'>id usuario</th>
+                            <th class='xd'>genero</th>
+                            <th class='xd'>fecha nac</th>
+                            <th class='xd'>tel</th>
+                            <th class='xd'>cuil</th>
+                            <th class='xd'>fotocopia dni</th>
+                            <th class='xd'>expediente anses</th>
+                            <th class='xd'>certificado nac</th>
+                            <th class='xd'>certificado domicilio</th>
+                            <th class='xd'>domicilio</th>
+                            <th class='xd'>estado academico</th>
+                            <th class='xd'>fch modificacion</th>
 
                             <!-- th class='xd'>Datos Personales</th -->
                             <th class='xd'>Editar</th>
@@ -383,6 +389,7 @@ $(document).ready(function()
                     console.log("Value: " , value)
 
                     $("#tabla1").append("<tr id='fila"+key+"'  >"+
+                    "<td class='xd'>"+value.nombre_completo+"</td>"+
                     "<td class='xd'>"+value.id_personal+"</td>"+
                     "<td class='xd'>"+value.id_usuario+"</td>"+
                     "<td class='xd'>"+value.genero+"</td>"+
